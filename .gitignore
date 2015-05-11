@@ -229,3 +229,7 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+WealthHealth/WealthHealth/Web.config
+WealthHealth/WealthHealth/Web.Debug.config
+WealthHealth/WealthHealth/Views/Web.config
+WealthHealth/WealthHealth/Web.Release.config
