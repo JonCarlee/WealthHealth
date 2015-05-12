@@ -7,7 +7,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>000be925-ebe7-4082-8992-fa009c0de084</ProjectGuid>
+    <ProjectGuid>{4B7BC579-5F31-4110-BB0E-95A41520E8D6}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -15,7 +15,7 @@
     <AssemblyName>WealthHealth</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -155,18 +155,296 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Custom\BudgetItem.cs" />
+    <Compile Include="Models\Custom\Transaction.cs" />
+    <Compile Include="Models\Custom\Category.cs" />
+    <Compile Include="Models\Custom\Account.cs" />
+    <Compile Include="Models\Custom\Household.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\App.css" />
+    <Content Include="css\bootstrap.css" />
+    <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\custom.css" />
+    <Content Include="css\font-awesome.min.css" />
+    <Content Include="css\Login.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
-    <Content Include="Scripts\_references.js" />
+    <Content Include="css\Site.css" />
+    <Content Include="img\avatars\avatar-1.jpg" />
+    <Content Include="img\avatars\avatar-2.jpg" />
+    <Content Include="img\avatars\avatar-large-1.jpg" />
+    <Content Include="img\avatars\avatar-large-2.jpg" />
+    <Content Include="img\gallery\zoom.png" />
+    <Content Include="img\jquery\handle-vertical.png" />
+    <Content Include="img\jquery\handle.png" />
+    <Content Include="img\layout\sidebar-bg.png" />
+    <Content Include="img\loaders\ajax-loader.gif" />
+    <Content Include="img\logos\logo-login.png" />
+    <Content Include="img\logos\logo.png" />
+    <Content Include="img\mockup.png" />
+    <Content Include="img\photos\blur-lg.jpg" />
+    <Content Include="img\photos\blur-sm.jpg" />
+    <Content Include="img\photos\clock-lg.jpg" />
+    <Content Include="img\photos\clock-sm.jpg" />
+    <Content Include="img\photos\lens-lg.jpg" />
+    <Content Include="img\photos\lens-sm.jpg" />
+    <Content Include="img\photos\rust-lg.jpg" />
+    <Content Include="img\photos\rust-sm.jpg" />
+    <Content Include="img\pricing\label-editable.png" />
+    <Content Include="img\pricing\label-red.png" />
+    <Content Include="img\pricing\label-yellow.png" />
+    <Content Include="js\App.js" />
+    <Content Include="js\bootstrap.js" />
+    <Content Include="js\bootstrap.min.js" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <None Include="js\jquery-1.10.2.intellisense.js" />
+    <Content Include="js\demos\buttons.js" />
+    <Content Include="js\demos\calendar.js" />
+    <Content Include="js\demos\charts\flot\area.js" />
+    <Content Include="js\demos\charts\flot\chart1.js" />
+    <Content Include="js\demos\charts\flot\chart2.js" />
+    <Content Include="js\demos\charts\flot\chart3.js" />
+    <Content Include="js\demos\charts\flot\chart4.js" />
+    <Content Include="js\demos\charts\flot\donut.js" />
+    <Content Include="js\demos\charts\flot\horizontal.js" />
+    <Content Include="js\demos\charts\flot\line.js" />
+    <Content Include="js\demos\charts\flot\pie.js" />
+    <Content Include="js\demos\charts\flot\scatter.js" />
+    <Content Include="js\demos\charts\flot\stacked-area.js" />
+    <Content Include="js\demos\charts\flot\stacked-horizontal.js" />
+    <Content Include="js\demos\charts\flot\stacked-vertical.js" />
+    <Content Include="js\demos\charts\flot\vertical.js" />
+    <Content Include="js\demos\charts\morris\area.js" />
+    <Content Include="js\demos\charts\morris\bar.js" />
+    <Content Include="js\demos\charts\morris\donut.js" />
+    <Content Include="js\demos\charts\morris\line.js" />
+    <Content Include="js\demos\dashboard.js" />
+    <Content Include="js\demos\form-extended.js" />
+    <Content Include="js\demos\popups.js" />
+    <Content Include="js\demos\pricing.js" />
+    <Content Include="js\demos\sliders.js" />
+    <Content Include="js\jquery-1.10.2.js" />
+    <Content Include="js\jquery-1.10.2.min.js" />
+    <None Include="js\jquery.validate-vsdoc.js" />
+    <Content Include="js\jquery.validate.js" />
+    <Content Include="js\jquery.validate.min.js" />
+    <Content Include="js\jquery.validate.unobtrusive.js" />
+    <Content Include="js\jquery.validate.unobtrusive.min.js" />
+    <Content Include="js\libs\bootstrap.js" />
+    <Content Include="js\libs\bootstrap.min.js" />
+    <Content Include="js\libs\css\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="js\libs\css\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="js\libs\css\ui-lightness\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="js\libs\css\ui-lightness\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="js\libs\css\ui-lightness\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="js\libs\css\ui-lightness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="js\libs\css\ui-lightness\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="js\libs\css\ui-lightness\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="js\libs\css\ui-lightness\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="js\libs\css\ui-lightness\images\ui-icons_222222_256x240.png" />
+    <Content Include="js\libs\css\ui-lightness\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="js\libs\css\ui-lightness\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="js\libs\css\ui-lightness\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="js\libs\css\ui-lightness\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="js\libs\css\ui-lightness\jquery-ui-1.9.2.custom.css" />
+    <Content Include="js\libs\css\ui-lightness\jquery-ui-1.9.2.custom.min.css" />
+    <Content Include="js\libs\jquery-1.9.1.min.js" />
+    <Content Include="js\libs\jquery-ui-1.9.2.custom.min.js" />
+    <Content Include="js\libs\raphael-2.1.2.min.js" />
+    <Content Include="js\Login.js" />
+    <Content Include="js\modernizr-2.6.2.js" />
+    <Content Include="js\plugins\autosize\jquery.autosize.min.js" />
+    <Content Include="js\plugins\datatables\DT_bootstrap.js" />
+    <Content Include="js\plugins\datatables\img\back_disabled.png" />
+    <Content Include="js\plugins\datatables\img\back_enabled.png" />
+    <Content Include="js\plugins\datatables\img\back_enabled_hover.png" />
+    <Content Include="js\plugins\datatables\img\datatable-row-openclose.png" />
+    <Content Include="js\plugins\datatables\img\favicon.ico" />
+    <Content Include="js\plugins\datatables\img\forward_disabled.png" />
+    <Content Include="js\plugins\datatables\img\forward_enabled.png" />
+    <Content Include="js\plugins\datatables\img\forward_enabled_hover.png" />
+    <Content Include="js\plugins\datatables\img\sort_asc.png" />
+    <Content Include="js\plugins\datatables\img\sort_asc_disabled.png" />
+    <Content Include="js\plugins\datatables\img\sort_both.png" />
+    <Content Include="js\plugins\datatables\img\sort_desc.png" />
+    <Content Include="js\plugins\datatables\img\sort_desc_disabled.png" />
+    <Content Include="js\plugins\datatables\jquery.dataTables.min.js" />
+    <Content Include="js\plugins\datepicker\bootstrap-datepicker.js" />
+    <Content Include="js\plugins\datepicker\datepicker.css" />
+    <Content Include="js\plugins\fileupload\bootstrap-fileupload.css" />
+    <Content Include="js\plugins\fileupload\bootstrap-fileupload.js" />
+    <Content Include="js\plugins\fileupload\bootstrap-fileupload.min.css" />
+    <Content Include="js\plugins\fileupload\bootstrap-fileupload.min.js" />
+    <Content Include="js\plugins\flot\jquery.flot.js" />
+    <Content Include="js\plugins\flot\jquery.flot.orderBars.js" />
+    <Content Include="js\plugins\flot\jquery.flot.pie.js" />
+    <Content Include="js\plugins\flot\jquery.flot.resize.js" />
+    <Content Include="js\plugins\flot\jquery.flot.stack.js" />
+    <Content Include="js\plugins\flot\jquery.flot.tooltip.min.js" />
+    <Content Include="js\plugins\fullcalendar\fullcalendar.css" />
+    <Content Include="js\plugins\fullcalendar\fullcalendar.js" />
+    <Content Include="js\plugins\fullcalendar\fullcalendar.min.js" />
+    <Content Include="js\plugins\fullcalendar\fullcalendar.print.css" />
+    <Content Include="js\plugins\fullcalendar\gcal.js" />
+    <Content Include="js\plugins\howl\howl.js" />
+    <Content Include="js\plugins\howl\howl.min.js" />
+    <Content Include="js\plugins\icheck\jquery.icheck.js" />
+    <Content Include="js\plugins\icheck\jquery.icheck.min.js" />
+    <Content Include="js\plugins\icheck\skins\all.css" />
+    <Content Include="js\plugins\icheck\skins\flat\aero%402x.png" />
+    <Content Include="js\plugins\icheck\skins\flat\aero.css" />
+    <Content Include="js\plugins\icheck\skins\flat\aero.png" />
+    <Content Include="js\plugins\icheck\skins\flat\blue%402x.png" />
+    <Content Include="js\plugins\icheck\skins\flat\blue.css" />
+    <Content Include="js\plugins\icheck\skins\flat\blue.png" />
+    <Content Include="js\plugins\icheck\skins\flat\flat%402x.png" />
+    <Content Include="js\plugins\icheck\skins\flat\flat.css" />
+    <Content Include="js\plugins\icheck\skins\flat\flat.png" />
+    <Content Include="js\plugins\icheck\skins\flat\green%402x.png" />
+    <Content Include="js\plugins\icheck\skins\flat\green.css" />
+    <Content Include="js\plugins\icheck\skins\flat\green.png" />
+    <Content Include="js\plugins\icheck\skins\flat\grey%402x.png" />
+    <Content Include="js\plugins\icheck\skins\flat\grey.css" />
+    <Content Include="js\plugins\icheck\skins\flat\grey.png" />
+    <Content Include="js\plugins\icheck\skins\flat\orange%402x.png" />
+    <Content Include="js\plugins\icheck\skins\flat\orange.css" />
+    <Content Include="js\plugins\icheck\skins\flat\orange.png" />
+    <Content Include="js\plugins\icheck\skins\flat\pink%402x.png" />
+    <Content Include="js\plugins\icheck\skins\flat\pink.css" />
+    <Content Include="js\plugins\icheck\skins\flat\pink.png" />
+    <Content Include="js\plugins\icheck\skins\flat\purple%402x.png" />
+    <Content Include="js\plugins\icheck\skins\flat\purple.css" />
+    <Content Include="js\plugins\icheck\skins\flat\purple.png" />
+    <Content Include="js\plugins\icheck\skins\flat\red%402x.png" />
+    <Content Include="js\plugins\icheck\skins\flat\red.css" />
+    <Content Include="js\plugins\icheck\skins\flat\red.png" />
+    <Content Include="js\plugins\icheck\skins\flat\yellow%402x.png" />
+    <Content Include="js\plugins\icheck\skins\flat\yellow.css" />
+    <Content Include="js\plugins\icheck\skins\flat\yellow.png" />
+    <Content Include="js\plugins\icheck\skins\flat\_all.css" />
+    <Content Include="js\plugins\icheck\skins\futurico\futurico%402x.png" />
+    <Content Include="js\plugins\icheck\skins\futurico\futurico.css" />
+    <Content Include="js\plugins\icheck\skins\futurico\futurico.png" />
+    <Content Include="js\plugins\icheck\skins\line\aero.css" />
+    <Content Include="js\plugins\icheck\skins\line\blue.css" />
+    <Content Include="js\plugins\icheck\skins\line\green.css" />
+    <Content Include="js\plugins\icheck\skins\line\grey.css" />
+    <Content Include="js\plugins\icheck\skins\line\line%402x.png" />
+    <Content Include="js\plugins\icheck\skins\line\line.css" />
+    <Content Include="js\plugins\icheck\skins\line\line.png" />
+    <Content Include="js\plugins\icheck\skins\line\orange.css" />
+    <Content Include="js\plugins\icheck\skins\line\pink.css" />
+    <Content Include="js\plugins\icheck\skins\line\purple.css" />
+    <Content Include="js\plugins\icheck\skins\line\red.css" />
+    <Content Include="js\plugins\icheck\skins\line\yellow.css" />
+    <Content Include="js\plugins\icheck\skins\line\_all.css" />
+    <Content Include="js\plugins\icheck\skins\minimal\aero%402x.png" />
+    <Content Include="js\plugins\icheck\skins\minimal\aero.css" />
+    <Content Include="js\plugins\icheck\skins\minimal\aero.png" />
+    <Content Include="js\plugins\icheck\skins\minimal\blue%402x.png" />
+    <Content Include="js\plugins\icheck\skins\minimal\blue.css" />
+    <Content Include="js\plugins\icheck\skins\minimal\blue.png" />
+    <Content Include="js\plugins\icheck\skins\minimal\green%402x.png" />
+    <Content Include="js\plugins\icheck\skins\minimal\green.css" />
+    <Content Include="js\plugins\icheck\skins\minimal\green.png" />
+    <Content Include="js\plugins\icheck\skins\minimal\grey%402x.png" />
+    <Content Include="js\plugins\icheck\skins\minimal\grey.css" />
+    <Content Include="js\plugins\icheck\skins\minimal\grey.png" />
+    <Content Include="js\plugins\icheck\skins\minimal\minimal%402x.png" />
+    <Content Include="js\plugins\icheck\skins\minimal\minimal.css" />
+    <Content Include="js\plugins\icheck\skins\minimal\minimal.png" />
+    <Content Include="js\plugins\icheck\skins\minimal\orange%402x.png" />
+    <Content Include="js\plugins\icheck\skins\minimal\orange.css" />
+    <Content Include="js\plugins\icheck\skins\minimal\orange.png" />
+    <Content Include="js\plugins\icheck\skins\minimal\pink%402x.png" />
+    <Content Include="js\plugins\icheck\skins\minimal\pink.css" />
+    <Content Include="js\plugins\icheck\skins\minimal\pink.png" />
+    <Content Include="js\plugins\icheck\skins\minimal\purple%402x.png" />
+    <Content Include="js\plugins\icheck\skins\minimal\purple.css" />
+    <Content Include="js\plugins\icheck\skins\minimal\purple.png" />
+    <Content Include="js\plugins\icheck\skins\minimal\red%402x.png" />
+    <Content Include="js\plugins\icheck\skins\minimal\red.css" />
+    <Content Include="js\plugins\icheck\skins\minimal\red.png" />
+    <Content Include="js\plugins\icheck\skins\minimal\yellow%402x.png" />
+    <Content Include="js\plugins\icheck\skins\minimal\yellow.css" />
+    <Content Include="js\plugins\icheck\skins\minimal\yellow.png" />
+    <Content Include="js\plugins\icheck\skins\minimal\_all.css" />
+    <Content Include="js\plugins\icheck\skins\polaris\polaris%402x.png" />
+    <Content Include="js\plugins\icheck\skins\polaris\polaris.css" />
+    <Content Include="js\plugins\icheck\skins\polaris\polaris.png" />
+    <Content Include="js\plugins\icheck\skins\square\aero%402x.png" />
+    <Content Include="js\plugins\icheck\skins\square\aero.css" />
+    <Content Include="js\plugins\icheck\skins\square\aero.png" />
+    <Content Include="js\plugins\icheck\skins\square\blue%402x.png" />
+    <Content Include="js\plugins\icheck\skins\square\blue.css" />
+    <Content Include="js\plugins\icheck\skins\square\blue.png" />
+    <Content Include="js\plugins\icheck\skins\square\green%402x.png" />
+    <Content Include="js\plugins\icheck\skins\square\green.css" />
+    <Content Include="js\plugins\icheck\skins\square\green.png" />
+    <Content Include="js\plugins\icheck\skins\square\grey%402x.png" />
+    <Content Include="js\plugins\icheck\skins\square\grey.css" />
+    <Content Include="js\plugins\icheck\skins\square\grey.png" />
+    <Content Include="js\plugins\icheck\skins\square\orange%402x.png" />
+    <Content Include="js\plugins\icheck\skins\square\orange.css" />
+    <Content Include="js\plugins\icheck\skins\square\orange.png" />
+    <Content Include="js\plugins\icheck\skins\square\pink%402x.png" />
+    <Content Include="js\plugins\icheck\skins\square\pink.css" />
+    <Content Include="js\plugins\icheck\skins\square\pink.png" />
+    <Content Include="js\plugins\icheck\skins\square\purple%402x.png" />
+    <Content Include="js\plugins\icheck\skins\square\purple.css" />
+    <Content Include="js\plugins\icheck\skins\square\purple.png" />
+    <Content Include="js\plugins\icheck\skins\square\red%402x.png" />
+    <Content Include="js\plugins\icheck\skins\square\red.css" />
+    <Content Include="js\plugins\icheck\skins\square\red.png" />
+    <Content Include="js\plugins\icheck\skins\square\square%402x.png" />
+    <Content Include="js\plugins\icheck\skins\square\square.css" />
+    <Content Include="js\plugins\icheck\skins\square\square.png" />
+    <Content Include="js\plugins\icheck\skins\square\yellow%402x.png" />
+    <Content Include="js\plugins\icheck\skins\square\yellow.css" />
+    <Content Include="js\plugins\icheck\skins\square\yellow.png" />
+    <Content Include="js\plugins\icheck\skins\square\_all.css" />
+    <Content Include="js\plugins\magnific\jquery.magnific-popup.js" />
+    <Content Include="js\plugins\magnific\jquery.magnific-popup.min.js" />
+    <Content Include="js\plugins\magnific\magnific-popup.css" />
+    <Content Include="js\plugins\morris\morris.css" />
+    <Content Include="js\plugins\morris\morris.min.js" />
+    <Content Include="js\plugins\parsley\parsley.js" />
+    <Content Include="js\plugins\select2\select2-spinner.gif" />
+    <Content Include="js\plugins\select2\select2.css" />
+    <Content Include="js\plugins\select2\select2.js" />
+    <Content Include="js\plugins\select2\select2.min.js" />
+    <Content Include="js\plugins\select2\select2.png" />
+    <Content Include="js\plugins\select2\select2x2.png" />
+    <Content Include="js\plugins\simplecolorpicker\jquery.simplecolorpicker.css" />
+    <Content Include="js\plugins\simplecolorpicker\jquery.simplecolorpicker.js" />
+    <Content Include="js\plugins\sparkline\jquery.sparkline.min.js" />
+    <Content Include="js\plugins\tableCheckable\jquery.tableCheckable.js" />
+    <Content Include="js\plugins\textarea-counter\jquery.textarea-counter.js" />
+    <Content Include="js\plugins\timepicker\bootstrap-timepicker.css" />
+    <Content Include="js\plugins\timepicker\bootstrap-timepicker.js" />
+    <Content Include="js\respond.js" />
+    <Content Include="js\respond.min.js" />
+    <Content Include="js\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -181,12 +459,41 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="js\jquery-1.10.2.min.map" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="js\plugins\datepicker\css\" />
+    <Folder Include="js\plugins\datepicker\js\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="packages.config" />
+    <Content Include="js\libs\jquery.min.map" />
+    <Content Include="js\plugins\datatables\img\Sorting icons.psd" />
+    <Content Include="js\plugins\datepicker\less\datepicker.less" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <PropertyGroup>
@@ -203,12 +510,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>57784</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl>http://localhost:57784/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
