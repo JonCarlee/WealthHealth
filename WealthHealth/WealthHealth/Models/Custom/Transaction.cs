@@ -15,7 +15,7 @@ namespace WealthHealth.Models.Custom
         public decimal ReconciledAmount { get; set; } //I don't know about this one
         public DateTimeOffset Date { get; set; }
         public int AccountId { get; set; }
-        public int HouseholdId { get; set;}
+        public int? HouseholdId { get; set;}
         public int CategoryId { get; set; }
 
         public virtual Account Account { get; set; }

@@ -3,15 +3,16 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @Styles.Render("~/css/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <!--//Styles.Render("~/css/css")
+    //Scripts.Render("~/bundles/modernizr")-->
 
         <title>Dashboard - Canvas Admin</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="">
         <meta name="author" content="" />
-
+        <link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,800italic,400,600,800" type="text/css">
 
         <link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css" />
@@ -26,359 +27,325 @@
 
         <link rel="stylesheet" href="~/css/custom.css" type="text/css" />
 </head>
-<body>
-    <div id="wrapper">
+@if (User.Identity.IsAuthenticated)
+{
+    <body>
 
-        <header id="header">
+        <div id="wrapper">
 
-            <h1 id="site-logo">
-                <a href="./index.html">
-                    <img src="./img/logos/logo.png" alt="Site Logo" />
-                </a>
-            </h1>
+            <header id="header">
 
-            <a href="javascript:;" data-toggle="collapse" data-target=".top-bar-collapse" id="top-bar-toggle" class="navbar-toggle collapsed">
-                <i class="fa fa-cog"></i>
-            </a>
-
-            <a href="javascript:;" data-toggle="collapse" data-target=".sidebar-collapse" id="sidebar-toggle" class="navbar-toggle collapsed">
-                <i class="fa fa-reorder"></i>
-            </a>
-
-        </header> <!-- header -->
-
-
-        <nav id="top-bar" class="collapse top-bar-collapse">
-
-            <ul class="nav navbar-nav pull-left">
-                <li class="">
+                <h1 id="site-logo">
                     <a href="./index.html">
-                        <i class="fa fa-home"></i>
-                        Home
+                        <img src="./img/logos/logo.png" alt="Site Logo" />
                     </a>
-                </li>
+                </h1>
 
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
-                        Dropdown <span class="caret"></span>
-                    </a>
+                <a href="javascript:;" data-toggle="collapse" data-target=".top-bar-collapse" id="top-bar-toggle" class="navbar-toggle collapsed">
+                    <i class="fa fa-cog"></i>
+                </a>
 
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="javascript:;"><i class="fa fa-user"></i>&nbsp;&nbsp;Example #1</a></li>
-                        <li><a href="javascript:;"><i class="fa fa-calendar"></i>&nbsp;&nbsp;Example #2</a></li>
-                        <li class="divider"></li>
-                        <li><a href="javascript:;"><i class="fa fa-tasks"></i>&nbsp;&nbsp;Example #3</a></li>
-                    </ul>
-                </li>
+                <a href="javascript:;" data-toggle="collapse" data-target=".sidebar-collapse" id="sidebar-toggle" class="navbar-toggle collapsed">
+                    <i class="fa fa-reorder"></i>
+                </a>
 
-            </ul>
-
-            <ul class="nav navbar-nav pull-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
-                        <i class="fa fa-user"></i>
-                        Rod Howard
-                        <span class="caret"></span>
-                    </a>
-
-                    <ul class="dropdown-menu" role="menu">
-                        <li>
-                            <a href="./page-profile.html">
-                                <i class="fa fa-user"></i>
-                                &nbsp;&nbsp;My Profile
-                            </a>
-                        </li>
-                        <li>
-                            <a href="./page-calendar.html">
-                                <i class="fa fa-calendar"></i>
-                                &nbsp;&nbsp;My Calendar
-                            </a>
-                        </li>
-                        <li>
-                            <a href="./page-settings.html">
-                                <i class="fa fa-cogs"></i>
-                                &nbsp;&nbsp;Settings
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="./page-login.html">
-                                <i class="fa fa-sign-out"></i>
-                                &nbsp;&nbsp;Logout
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-
-        </nav> <!-- /#top-bar -->
+            </header> <!-- header -->
 
 
-        <div id="sidebar-wrapper" class="collapse sidebar-collapse">
+            <nav id="top-bar" class="collapse top-bar-collapse">
 
-            <div id="search">
-                <form>
-                    <input class="form-control input-sm" type="text" name="search" placeholder="Search..." />
-
-                    <button type="submit" id="search-btn" class="btn"><i class="fa fa-search"></i></button>
-                </form>
-            </div> <!-- #search -->
-
-            <nav id="sidebar">
-
-                <ul id="main-nav" class="open-active">
-
-                    <li class="active">
-                        <a href="./index.html">
-                            <i class="fa fa-dashboard"></i>
-                            Dashboard
+                <ul class="nav navbar-nav pull-left">
+                    <li class="">
+                        <a href="~/Views/Home/Household">
+                            <i class="fa fa-home"></i>
+                            Home
                         </a>
                     </li>
 
                     <li class="dropdown">
-                        <a href="javascript:;">
-                            <i class="fa fa-file-text"></i>
-                            Example Pages
-                            <span class="caret"></span>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+                            Test <span class="caret"></span>
                         </a>
 
-                        <ul class="sub-nav">
-                            <li>
-                                <a href="./page-profile.html">
-                                    <i class="fa fa-user"></i>
-                                    Profile
-                                </a>
-                            </li>
-                            <li>
-                                <a href="./page-invoice.html">
-                                    <i class="fa fa-money"></i>
-                                    Invoice
-                                </a>
-                            </li>
-                            <li>
-                                <a href="./page-pricing.html">
-                                    <i class="fa fa-dollar"></i>
-                                    Pricing Plans
-                                </a>
-                            </li>
-                            <li>
-                                <a href="./page-support.html">
-                                    <i class="fa fa-question"></i>
-                                    Support Page
-                                </a>
-                            </li>
-                            <li>
-                                <a href="./page-gallery.html">
-                                    <i class="fa fa-picture-o"></i>
-                                    Gallery
-                                </a>
-                            </li>
-                            <li>
-                                <a href="./page-settings.html">
-                                    <i class="fa fa-cogs"></i>
-                                    Settings
-                                </a>
-                            </li>
-                            <li>
-                                <a href="./page-calendar.html">
-                                    <i class="fa fa-calendar"></i>
-                                    Calendar
-                                </a>
-                            </li>
-                        </ul>
-
-                    </li>
-
-                    <li class="dropdown">
-                        <a href="javascript:;">
-                            <i class="fa fa-tasks"></i>
-                            Form Elements
-                            <span class="caret"></span>
-                        </a>
-
-                        <ul class="sub-nav">
-                            <li>
-                                <a href="./form-regular.html">
-                                    <i class="fa fa-location-arrow"></i>
-                                    Regular Elements
-                                </a>
-                            </li>
-                            <li>
-                                <a href="./form-extended.html">
-                                    <i class="fa fa-magic"></i>
-                                    Extended Elements
-                                </a>
-                            </li>
-                            <li>
-                                <a href="./form-validation.html">
-                                    <i class="fa fa-check"></i>
-                                    Validation
-                                </a>
-                            </li>
-                        </ul>
-
-                    </li>
-
-                    <li class="dropdown">
-                        <a href="javascript:;">
-                            <i class="fa fa-desktop"></i>
-                            UI Features
-                            <span class="caret"></span>
-                        </a>
-
-                        <ul class="sub-nav">
-                            <li>
-                                <a href="./ui-buttons.html">
-                                    <i class="fa fa-hand-o-up"></i>
-                                    Buttons
-                                </a>
-                            </li>
-                            <li>
-                                <a href="./ui-tabs.html">
-                                    <i class="fa fa-reorder"></i>
-                                    Tabs & Accordions
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="./ui-popups.html">
-                                    <i class="fa fa-asterisk"></i>
-                                    Popups / Notifications
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="./ui-sliders.html">
-                                    <i class="fa fa-tasks"></i>
-                                    Sliders
-                                </a>
-                            </li>
-
-                            <li class="">
-                                <a href="./ui-typography.html">
-                                    <i class="fa fa-font"></i>
-                                    Typography
-                                </a>
-                            </li>
-
-                            <li class="">
-                                <a href="./ui-icons.html">
-                                    <i class="fa fa-star-o"></i>
-                                    Icons
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="dropdown">
-                        <a href="javascript:;">
-                            <i class="fa fa-table"></i>
-                            Tables
-                            <span class="caret"></span>
-                        </a>
-
-                        <ul class="sub-nav">
-                            <li>
-                                <a href="./table-basic.html">
-                                    <i class="fa fa-table"></i>
-                                    Basic Tables
-                                </a>
-                            </li>
-                            <li>
-                                <a href="./table-advanced.html">
-                                    <i class="fa fa-table"></i>
-                                    Advanced Tables
-                                </a>
-                            </li>
-                            <li>
-                                <a href="./table-responsive.html">
-                                    <i class="fa fa-table"></i>
-                                    Responsive Tables
-                                </a>
-                            </li>
-                        </ul>
-
-                    </li>
-
-                    <li>
-                        <a href="./ui-portlets.html">
-                            <i class="fa fa-list-alt"></i>
-                            Portlets
-                        </a>
-                    </li>
-
-                    <li class="dropdown">
-                        <a href="javascript:;">
-                            <i class="fa fa-bar-chart-o"></i>
-                            Charts & Graphs
-                            <span class="caret"></span>
-                        </a>
-
-                        <ul class="sub-nav">
-                            <li>
-                                <a href="./chart-flot.html">
-                                    <i class="fa fa-bar-chart-o"></i>
-                                    jQuery Flot
-                                </a>
-                            </li>
-                            <li>
-                                <a href="./chart-morris.html">
-                                    <i class="fa fa-bar-chart-o"></i>
-                                    Morris.js
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="dropdown">
-                        <a href="javascript:;">
-                            <i class="fa fa-file-text-o"></i>
-                            Extra Pages
-                            <span class="caret"></span>
-                        </a>
-
-                        <ul class="sub-nav">
-                            <li>
-                                <a href="./page-login.html">
-                                    <i class="fa fa-unlock"></i>
-                                    Login Basic
-                                </a>
-                            </li>
-                            <li>
-                                <a href="./page-login-social.html">
-                                    <i class="fa fa-unlock"></i>
-                                    Login Social
-                                </a>
-                            </li>
-                            <li>
-                                <a href="./page-404.html">
-                                    <i class="fa fa-ban"></i>
-                                    404 Error
-                                </a>
-                            </li>
-                            <li>
-                                <a href="./page-500.html">
-                                    <i class="fa fa-ban"></i>
-                                    500 Error
-                                </a>
-                            </li>
-                            <li>
-                                <a href="./page-blank.html">
-                                    <i class="fa fa-file-text-o"></i>
-                                    Blank Page
-                                </a>
-                            </li>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="javascript:;"><i class="fa fa-user"></i>&nbsp;&nbsp;EAT</a></li>
+                            <li><a href="javascript:;"><i class="fa fa-calendar"></i>&nbsp;&nbsp;MOAR</a></li>
+                            <li class="divider"></li>
+                            <li><a href="javascript:;"><i class="fa fa-tasks"></i>&nbsp;&nbsp;STUFF/a></li>
                         </ul>
                     </li>
 
                 </ul>
 
-            </nav> <!-- #sidebar -->
+                            @Html.Partial("_LoginPartial")
 
-        </div> <!-- /#sidebar-wrapper -->
 
+            </nav> <!-- /#top-bar -->
+
+
+            <div id="sidebar-wrapper" class="collapse sidebar-collapse">
+
+                <div id="search">
+                    <form>
+                        <input class="form-control input-sm" type="text" name="search" placeholder="Search..." />
+
+                        <button type="submit" id="search-btn" class="btn"><i class="fa fa-search"></i></button>
+                    </form>
+                </div> <!-- #search -->
+
+                <nav id="sidebar">
+
+                    <ul id="main-nav" class="open-active">
+
+                        <li class="active">
+                            <a href="./index.html">
+                                <i class="fa fa-dashboard"></i>
+                                Dashboard
+                            </a>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="javascript:;">
+                                <i class="fa fa-file-text"></i>
+                                Example Pages
+                                <span class="caret"></span>
+                            </a>
+
+                            <ul class="sub-nav">
+                                <li>
+                                    <a href="./page-profile.html">
+                                        <i class="fa fa-user"></i>
+                                        Profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./page-invoice.html">
+                                        <i class="fa fa-money"></i>
+                                        Invoice
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./page-pricing.html">
+                                        <i class="fa fa-dollar"></i>
+                                        Pricing Plans
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./page-support.html">
+                                        <i class="fa fa-question"></i>
+                                        Support Page
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./page-gallery.html">
+                                        <i class="fa fa-picture-o"></i>
+                                        Gallery
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./page-settings.html">
+                                        <i class="fa fa-cogs"></i>
+                                        Settings
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./page-calendar.html">
+                                        <i class="fa fa-calendar"></i>
+                                        Calendar
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="javascript:;">
+                                <i class="fa fa-tasks"></i>
+                                Form Elements
+                                <span class="caret"></span>
+                            </a>
+
+                            <ul class="sub-nav">
+                                <li>
+                                    <a href="./form-regular.html">
+                                        <i class="fa fa-location-arrow"></i>
+                                        Regular Elements
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./form-extended.html">
+                                        <i class="fa fa-magic"></i>
+                                        Extended Elements
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./form-validation.html">
+                                        <i class="fa fa-check"></i>
+                                        Validation
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="javascript:;">
+                                <i class="fa fa-desktop"></i>
+                                UI Features
+                                <span class="caret"></span>
+                            </a>
+
+                            <ul class="sub-nav">
+                                <li>
+                                    <a href="./ui-buttons.html">
+                                        <i class="fa fa-hand-o-up"></i>
+                                        Buttons
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./ui-tabs.html">
+                                        <i class="fa fa-reorder"></i>
+                                        Tabs & Accordions
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="./ui-popups.html">
+                                        <i class="fa fa-asterisk"></i>
+                                        Popups / Notifications
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="./ui-sliders.html">
+                                        <i class="fa fa-tasks"></i>
+                                        Sliders
+                                    </a>
+                                </li>
+
+                                <li class="">
+                                    <a href="./ui-typography.html">
+                                        <i class="fa fa-font"></i>
+                                        Typography
+                                    </a>
+                                </li>
+
+                                <li class="">
+                                    <a href="./ui-icons.html">
+                                        <i class="fa fa-star-o"></i>
+                                        Icons
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="javascript:;">
+                                <i class="fa fa-table"></i>
+                                Tables
+                                <span class="caret"></span>
+                            </a>
+
+                            <ul class="sub-nav">
+                                <li>
+                                    <a href="./table-basic.html">
+                                        <i class="fa fa-table"></i>
+                                        Basic Tables
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./table-advanced.html">
+                                        <i class="fa fa-table"></i>
+                                        Advanced Tables
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./table-responsive.html">
+                                        <i class="fa fa-table"></i>
+                                        Responsive Tables
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </li>
+
+                        <li>
+                            <a href="./ui-portlets.html">
+                                <i class="fa fa-list-alt"></i>
+                                Portlets
+                            </a>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="javascript:;">
+                                <i class="fa fa-bar-chart-o"></i>
+                                Charts & Graphs
+                                <span class="caret"></span>
+                            </a>
+
+                            <ul class="sub-nav">
+                                <li>
+                                    <a href="./chart-flot.html">
+                                        <i class="fa fa-bar-chart-o"></i>
+                                        jQuery Flot
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./chart-morris.html">
+                                        <i class="fa fa-bar-chart-o"></i>
+                                        Morris.js
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="javascript:;">
+                                <i class="fa fa-file-text-o"></i>
+                                Extra Pages
+                                <span class="caret"></span>
+                            </a>
+
+                            <ul class="sub-nav">
+                                <li>
+                                    <a href="./page-login.html">
+                                        <i class="fa fa-unlock"></i>
+                                        Login Basic
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./page-login-social.html">
+                                        <i class="fa fa-unlock"></i>
+                                        Login Social
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./page-404.html">
+                                        <i class="fa fa-ban"></i>
+                                        404 Error
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./page-500.html">
+                                        <i class="fa fa-ban"></i>
+                                        500 Error
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./page-blank.html">
+                                        <i class="fa fa-file-text-o"></i>
+                                        Blank Page
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+
+                </nav> <!-- #sidebar -->
+
+            </div> <!-- /#sidebar-wrapper -->
             @RenderBody()
-            <hr />
             <footer id="footer">
                 <ul class="nav pull-right">
                     <li>
@@ -386,10 +353,14 @@
                     </li>
                 </ul>
             </footer>
-    </div> <!-- #wrapper -->
-
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("scripts", required: false)
-</body>
+        </div> <!-- #wrapper -->
+    </body>
+}
+else
+{
+        @RenderBody()
+    }
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </html>

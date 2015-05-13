@@ -29,5 +29,17 @@ namespace WealthHealth.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<WealthHealth.Models.Custom.Account> Accounts { get; set; }
+        
+        public System.Data.Entity.DbSet<WealthHealth.Models.Custom.BudgetItem> BudgetItems { get; set; }
+       
+        public System.Data.Entity.DbSet<WealthHealth.Models.Custom.Category> Categories { get; set; }
+       
+        public System.Data.Entity.DbSet<WealthHealth.Models.Custom.Household> Households { get; set; }
+        
+        public System.Data.Entity.DbSet<WealthHealth.Models.Custom.Transaction> Transactions { get; set; }
     }
+
+
 }

@@ -10,9 +10,20 @@ namespace WealthHealth.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Household");
+            }
+            else
+            {
+                return View();
+            }
         }
 
+        public ActionResult Household()
+        {
+            return View();
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

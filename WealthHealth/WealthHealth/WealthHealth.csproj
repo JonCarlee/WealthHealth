@@ -164,6 +164,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Custom\BudgetItem.cs" />
     <Compile Include="Models\Custom\Transaction.cs" />
@@ -176,12 +177,16 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Audio\Website Intro.mp3" />
     <Content Include="css\App.css" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\custom.css" />
+    <Content Include="css\docs.css" />
     <Content Include="css\font-awesome.min.css" />
     <Content Include="css\Login.css" />
+    <Content Include="css\main.css" />
+    <Content Include="css\syntax.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -210,6 +215,7 @@
     <Content Include="img\pricing\label-editable.png" />
     <Content Include="img\pricing\label-red.png" />
     <Content Include="img\pricing\label-yellow.png" />
+    <Content Include="img\space.jpg" />
     <Content Include="js\App.js" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
@@ -217,6 +223,8 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\facepunch_tbs.ttf" />
+    <Content Include="fonts\DigitMono.ttf" />
     <None Include="js\jquery-1.10.2.intellisense.js" />
     <Content Include="js\demos\buttons.js" />
     <Content Include="js\demos\calendar.js" />
@@ -458,7 +466,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Household.cshtml" />
     <Content Include="js\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -480,6 +488,8 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\_ExternalLoginsListPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

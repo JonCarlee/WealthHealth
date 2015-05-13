@@ -3,6 +3,32 @@ body {
   font: 13px/1.7em "Open Sans", "trebuchet ms", arial, sans-serif;
   background: #666666 url(../img/layout/sidebar-bg.png) repeat-y 0 0;
 }
+body.welcome {
+      background: url(../img/space.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+@font-face {
+    font-family: FacePunch;
+    src: url(../fonts/facepunch_tbs.ttf);
+}
+@font-face {
+    font-family: DigitMono;
+    src: url(../fonts/DigitMono.ttf);
+}
+h1.bam{
+    font-family: DigitMono;
+    font-size: 100px;
+    text-shadow:10px 10px 10px;
+    color: #e8e8e8;
+}
+h3.bam{
+    font-family: 'Abel', serif;
+    font-size: 70px;
+    color: #e8e8e8
+}
 h1,
 h2,
 h3,
