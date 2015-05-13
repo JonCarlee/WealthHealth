@@ -24,6 +24,12 @@ namespace WealthHealth.Controllers
         {
             return View();
         }
+
+        public ActionResult TEST()
+        {
+            return View();
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

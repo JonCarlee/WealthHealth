@@ -155,20 +155,20 @@
             case 1:
                 if (first == false) {
                     first = true;
-                    $("#return").fadeIn(800);
+                    $("#return").fadeIn(300);
                     break;
                 }
-                $("#create").slideUp(400);
-                $("#return").delay(400).fadeIn(800);
+                $("#create").slideUp(300);
+                $("#return").delay(300).slideDown(300);
                 break;
             case 2:
                 if (first == false) {
                     first = true;
-                    $("#create").fadeIn(800);
+                    $("#create").fadeIn(300);
                     break;
                 }
-                $("#return").slideUp(400);
-                $("#create").delay(400).fadeIn(800);
+                $("#return").slideUp(300);
+                $("#create").delay(300).slideDown(300);
                 break
         }
     }
