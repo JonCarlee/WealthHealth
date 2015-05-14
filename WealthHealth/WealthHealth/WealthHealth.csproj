@@ -185,8 +185,6 @@
     <Content Include="css\docs.css" />
     <Content Include="css\font-awesome.min.css" />
     <Content Include="css\Login.css" />
-    <Content Include="css\main.css" />
-    <Content Include="css\syntax.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -204,6 +202,7 @@
     <Content Include="img\logos\logo-login.png" />
     <Content Include="img\logos\logo.png" />
     <Content Include="img\mockup.png" />
+    <Content Include="img\moneybackground.jpg" />
     <Content Include="img\photos\blur-lg.jpg" />
     <Content Include="img\photos\blur-sm.jpg" />
     <Content Include="img\photos\clock-lg.jpg" />

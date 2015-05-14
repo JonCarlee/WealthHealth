@@ -62,16 +62,26 @@
                         </a>
                     </li>
 
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+                            Test <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="javascript:;"><i class="fa fa-user"></i>&nbsp;&nbsp;EAT</a></li>
+                            <li><a href="javascript:;"><i class="fa fa-calendar"></i>&nbsp;&nbsp;MOAR</a></li>
+                            <li class="divider"></li>
+                            <li><a href="javascript:;"><i class="fa fa-tasks"></i>&nbsp;&nbsp;STUFF</a></li>
+                        </ul>
+                    </li>
+
                 </ul>
 
                 @Html.Partial("_LoginPartial")
 
 
             </nav> <!-- /#top-bar -->
-
-
             <div id="sidebar-wrapper" class="collapse sidebar-collapse">
-
                 <div id="search">
                     <form>
                         <input class="form-control input-sm" type="text" name="search" placeholder="Search..." />
@@ -330,7 +340,6 @@
                     </ul>
 
                 </nav> <!-- #sidebar -->
-
             </div> <!-- /#sidebar-wrapper -->
             @RenderBody()
             <footer id="footer">
@@ -341,13 +350,37 @@
                 </ul>
             </footer>
         </div> <!-- #wrapper -->
+                    <script src="~/js/libs/jquery-1.9.1.min.js"></script>
+            <script src="~/js/libs/jquery-ui-1.9.2.custom.min.js"></script>
+            <script src="~/js/libs/bootstrap.min.js"></script>
+
+            <script src="~/js/plugins/icheck/jquery.icheck.min.js"></script>
+            <script src="~/js/plugins/select2/select2.js"></script>
+            <script src="~/js/plugins/tableCheckable/jquery.tableCheckable.js"></script>
+
+            <script src="~/js/App.js"></script>
+
+            <script src="~/js/libs/raphael-2.1.2.min.js"></script>
+            <script src="~/js/plugins/morris/morris.min.js"></script>
+
+            <script src="~/js/demos/charts/morris/area.js"></script>
+            <script src="~/js/demos/charts/morris/donut.js"></script>
+
+            <script src="~/js/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+            <script src="~/js/plugins/fullcalendar/fullcalendar.min.js"></script>
+            <script src="~/js/demos/calendar.js"></script>
+
+            <script src="~/js/demos/dashboard.js"></script>
+        @RenderSection("scripts", required: false)
     </body>
 }
 else
 {
-    @RenderBody()
+    <body>
+        @RenderBody()
+        @Scripts.Render("~/bundles/jquery")
+        @RenderSection("scripts", required: false)
+    </body>
 }
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/bootstrap")
-@RenderSection("scripts", required: false)
 </html>

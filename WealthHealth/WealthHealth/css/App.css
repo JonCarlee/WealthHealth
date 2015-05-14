@@ -4,7 +4,7 @@ body {
   background: #666666 url(../img/layout/sidebar-bg.png) repeat-y 0 0;
 }
 body.welcome {
-      background: url(../img/space.jpg) no-repeat center center fixed; 
+      background: url(../img/moneybackground.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
