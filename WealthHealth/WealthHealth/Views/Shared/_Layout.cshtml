@@ -341,15 +341,17 @@
 
                 </nav> <!-- #sidebar -->
             </div> <!-- /#sidebar-wrapper -->
-            @RenderBody()
-            <footer id="footer">
-                <ul class="nav pull-right">
-                    <li>
-                        Copyright &copy; Jon Carlee 2015.
-                    </li>
-                </ul>
-            </footer>
-        </div> <!-- #wrapper -->
+            <div id="content">
+                @RenderBody()
+            </div>
+                <footer id="footer">
+                    <ul class="nav pull-right">
+                        <li>
+                            Copyright &copy; Jon Carlee 2015.
+                        </li>
+                    </ul>
+                </footer>
+            </div> <!-- #wrapper -->
                     <script src="~/js/libs/jquery-1.9.1.min.js"></script>
             <script src="~/js/libs/jquery-ui-1.9.2.custom.min.js"></script>
             <script src="~/js/libs/bootstrap.min.js"></script>

@@ -1,0 +1,47 @@
+﻿@model WealthHealth.Models.Custom.Account
+
+@{
+}
+<div id="content-header">
+    <h2>Create</h2>
+</div> <!-- #content-header -->
+<div id="content-container">
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Account</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="control-label col-md-2">Name</label>
+            <div class="col-md-10">
+                <input type="text" name="Name" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Amount</label>
+                <div class="col-md-10">
+                    <input type="number" step="0.01" autocomplete="off" decimalprecision="2" maxlength="14" placeholder="$0.00" name="Amount" />
+                </div>
+            </div>
+
+            <input type="hidden" name="HouseholdId" value="@Model.HouseholdId" />
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    </div>
