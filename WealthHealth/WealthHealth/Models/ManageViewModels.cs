@@ -2,9 +2,35 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using WealthHealth.Models.Custom;
+using System;
+using System.Linq;
+
 
 namespace WealthHealth.Models
 {
+
+    public class UserHouseholdHelper
+    {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
+        public void CreateHousehold(string id, string name)
+        {
+            var user = db.Users.Find(id);
+            var list = new List<ApplicationUser>();
+            list.Add(user);
+            var household = new Household
+            {
+                Name = name,
+                HouseId = Guid.NewGuid().ToString(),
+                Users = list,
+            };
+            db.Households.Add(household);
+            user.HouseholdId = household.HouseId;
+            db.SaveChanges();
+        }
+    }
+
     public class IndexViewModel
     {
         public bool HasPassword { get; set; }

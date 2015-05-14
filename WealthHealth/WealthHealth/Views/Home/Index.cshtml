@@ -51,7 +51,7 @@
     </div>   
     <br />
     <br />
-    <div class="container">
+    <div class="container"> 
         <div class="row" hidden="hidden" id="return" style="color: #e8e8e8;">
             <div class="col-md-8">
                 <section id="loginForm">
@@ -91,10 +91,7 @@
                         <p>
 
                         </p>
-                        @* Enable this once you have account confirmation enabled for password reset functionality
-                        <p>
-                            @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                        </p>*@
+                            @Html.ActionLink("Forgot your password?", "ForgotPassword", "Acount")
                     }
                 </section>
             </div>
@@ -113,6 +110,59 @@
                 <h4>Create a new account.</h4>
                 <hr />
                 @Html.ValidationSummary("", new { @class = "text-danger" })
+               <div class="form-group">
+                    @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                    </div>
+                </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Gender, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            <div class="btn-group col-md-10" data-toggle="buttons" hidden="hidden">
+
+                <label class="btn btn-info" style="width: 100px; height:35px; font-size: 15px;">
+
+                    <input id="op1" type="radio" name="Gender" value="Male" />
+
+                    Male
+
+
+                </label>
+                <label class="btn btn-info" style="width: 100px; height:35px; font-size: 15px;">
+
+                    <input id="op2" type="radio" name="Gender" value="Female" />
+
+                    Female
+
+
+                </label>
+                <label class="btn btn-info" style="width: 100px; height:35px; font-size: 15px;">
+
+                    <input id="op3" type="radio" name="Gender" value="Other" />
+
+                    Other
+
+
+                </label>
+                <label class="btn btn-info" style="width: auto; height:35px; font-size: 15px;">
+
+                    <input id="op4" type="radio" name="Gender" value="" />
+
+                    Won't Specify
+
+
+                </label>
+
+            </div>
+        </div>
+    </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
@@ -129,6 +179,14 @@
                     @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
                         @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2 control-label">
+                        Household Name
+                    </div>
+                    <div class="col-md-10">
+                        <input class="form-control" data-val="true" data-val-required="The Household Name field is required." id="LastName" name="theName" type="text" value="">
                     </div>
                 </div>
                 <div class="form-group">

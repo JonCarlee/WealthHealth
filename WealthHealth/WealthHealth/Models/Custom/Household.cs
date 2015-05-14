@@ -15,6 +15,8 @@ namespace WealthHealth.Models.Custom
             this.Transactions = new HashSet<Transaction>();
         }
         public int Id { get; set; }
+        public string HouseId { get; set; }
+        public string Name { get; set; }
         public ICollection<ApplicationUser> Users { get; set; }
         public ICollection<Account> Accounts { get; set; }
         public ICollection<BudgetItem> BudgetItems { get; set; }

@@ -4,11 +4,10 @@ body {
   background: #666666 url(../img/layout/sidebar-bg.png) repeat-y 0 0;
 }
 body.welcome {
-      background: url(../img/moneybackground.jpg) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+    background-color:rgba(0, 0, 0, 0.82);
+    color: rgba(0, 0, 0, 0.82);
+      background:  linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(../img/moneybackground.jpg) no-repeat center center fixed;
+
 }
 @font-face {
     font-family: FacePunch;
