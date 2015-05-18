@@ -233,3 +233,5 @@ WealthHealth/WealthHealth/Web.config
 WealthHealth/WealthHealth/Web.Debug.config
 WealthHealth/WealthHealth/Views/Web.config
 WealthHealth/WealthHealth/Web.Release.config
+WealthHealth/WealthHealth/App_Start/Startup.Auth.cs
+WealthHealth/WealthHealth/App_Start/Startup.Auth.cs
