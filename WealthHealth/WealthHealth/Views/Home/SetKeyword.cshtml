@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "SetKeyword";
+}
+
+<h2>SetKeyword</h2>
+
+<form method="post">
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <label class="col-md-2">Household Keyword</label>
+        <input type="text" class="col-md-10 form-control" name="keyword" />
+        <input type="hidden" name="id" value="@ViewBag.Id" />
+    </div>
+    <input type="submit" value="Set Keyword" />
+</form>

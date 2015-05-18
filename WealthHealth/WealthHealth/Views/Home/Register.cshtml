@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+}
+
+@using (Html.BeginForm("Register", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+    @Html.AntiForgeryToken()
+    <h4>Create a new account.</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        <label class="col-md-2 control-label">First Name</label>
+        <div class="col-md-10">
+            <input type="text" name="FirstName" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Last Name</label>
+        <div class="col-md-10">
+            <input type="text" name="LastName" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Gender</label>
+        <div class="col-md-10">
+            <div class="btn-group col-md-10" data-toggle="buttons" hidden="hidden">
+
+                <label class="btn btn-info" style="width: 100px; height:35px; font-size: 15px;">
+
+                    <input id="op1" type="radio" name="Gender" value="Male" />
+
+                    Male
+
+
+                </label>
+                <label class="btn btn-info" style="width: 100px; height:35px; font-size: 15px;">
+
+                    <input id="op2" type="radio" name="Gender" value="Female" />
+
+                    Female
+
+
+                </label>
+                <label class="btn btn-info" style="width: 100px; height:35px; font-size: 15px;">
+
+                    <input id="op3" type="radio" name="Gender" value="Other" />
+
+                    Other
+
+
+                </label>
+                <label class="btn btn-info" style="width: auto; height:35px; font-size: 15px;">
+
+                    <input id="op4" type="radio" name="Gender" value="" />
+
+                    Won't Specify
+
+
+                </label>
+
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Email</label>
+        <div class="col-md-10">
+            <input type="text" name="Email" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Password</label>
+        <div class="col-md-10">
+            <input type="password" name="Password" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Confirm Password</label>
+        <div class="col-md-10">
+            <input type="password" name="ConfirmPassword" class="form-control" />
+        </div>
+    </div>
+    <input type="hidden" name="Name" value="fobar" />
+    <input type="hidden" name="Id" value="@ViewBag.Id" />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-info" value="Register" />
+        </div>
+    </div>

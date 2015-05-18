@@ -17,10 +17,11 @@ namespace WealthHealth.Models.Custom
         public int Id { get; set; }
         public string HouseId { get; set; }
         public string Name { get; set; }
-        public ICollection<ApplicationUser> Users { get; set; }
-        public ICollection<Account> Accounts { get; set; }
-        public ICollection<BudgetItem> BudgetItems { get; set; }
-        public ICollection<Transaction> Transactions { get; set; }
+        public string Keyword { get; set; }
+        public virtual ICollection<ApplicationUser> Users { get; set; }
+        public virtual ICollection<Account> Accounts { get; set; }
+        public virtual ICollection<BudgetItem> BudgetItems { get; set; }
+        public virtual ICollection<Transaction> Transactions { get; set; }
 
     }
 }

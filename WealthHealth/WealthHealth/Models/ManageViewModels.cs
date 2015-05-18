@@ -29,8 +29,22 @@ namespace WealthHealth.Models
             user.HouseholdId = household.HouseId;
             db.SaveChanges();
         }
+
+        public void addAccountToHousehold(Account account, Household household)
+        {
+            household.Accounts.Add(account);    
+            db.SaveChanges();
+        }
     }
 
+    public class InviteViewModel
+    {
+        public int Id { get; set; }
+        public string First { get; set; }
+        public string Last { get; set; }
+        public string Email { get; set; }
+        public string Sender { get; set; }
+    }
     public class IndexViewModel
     {
         public bool HasPassword { get; set; }

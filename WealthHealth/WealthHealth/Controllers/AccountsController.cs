@@ -38,9 +38,10 @@ namespace WealthHealth.Controllers
         }
 
         // GET: Accounts/Create
-        public ActionResult Create()
+        public ActionResult Create(int Id)
         {
-            ViewBag.HouseholdId = new SelectList(db.Households, "Id", "HouseId");
+            var house = db.Households.Find(Id);
+            ViewBag.HouseholdId = house.HouseId;
             return View();
         }
 
@@ -54,11 +55,13 @@ namespace WealthHealth.Controllers
             if (ModelState.IsValid)
             {
                 db.Accounts.Add(account);
+                var house = db.Households.FirstOrDefault(h => h.HouseId == account.HouseholdId);
+                house.Accounts.Add(account);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Household", "Home", new { Id = account.HouseholdId});
             }
 
-            ViewBag.HouseholdId = new SelectList(db.Households, "Id", "HouseId", account.HouseholdId);
+            ViewBag.HouseholdId = account.HouseholdId;
             return View(account);
         }
 
@@ -74,7 +77,6 @@ namespace WealthHealth.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.HouseholdId = new SelectList(db.Households, "Id", "HouseId", account.HouseholdId);
             return View(account);
         }
 
@@ -89,7 +91,7 @@ namespace WealthHealth.Controllers
             {
                 db.Entry(account).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Household", "Home", new { Id = account.HouseholdId });
             }
             ViewBag.HouseholdId = new SelectList(db.Households, "Id", "HouseId", account.HouseholdId);
             return View(account);

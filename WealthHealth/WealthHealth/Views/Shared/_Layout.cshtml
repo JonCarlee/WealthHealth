@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--//Styles.Render("~/css/css")
-    //Scripts.Render("~/bundles/modernizr")-->
+    @*@Styles.Render("~/css/css")*@
+    @Scripts.Render("~/bundles/modernizr")
 
     <title>Dashboard - Canvas Admin</title>
     <meta charset="utf-8">
@@ -14,6 +14,7 @@
     <link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,800italic,400,600,800" type="text/css">
+
 
     <link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css" />
     <link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css" />
@@ -36,8 +37,8 @@
             <header id="header">
 
                 <h1 id="site-logo">
-                    <a href="./index.html">
-                        <img src="./img/logos/logo.png" alt="Site Logo" />
+                    <a href="/Home/Index">
+                        <img src="~/img/logos/logo.png" alt="Site Logo" />
                     </a>
                 </h1>
 
@@ -56,7 +57,7 @@
 
                 <ul class="nav navbar-nav pull-left">
                     <li class="">
-                        <a href="~/Views/Home/Household">
+                        <a href="/Home/Index">
                             <i class="fa fa-home"></i>
                             Home
                         </a>
@@ -95,7 +96,7 @@
                     <ul id="main-nav" class="open-active">
 
                         <li class="active">
-                            <a href="./index.html">
+                            <a href="/Home/Index">
                                 <i class="fa fa-dashboard"></i>
                                 Dashboard
                             </a>
@@ -104,53 +105,18 @@
                         <li class="dropdown">
                             <a href="javascript:;">
                                 <i class="fa fa-file-text"></i>
-                                Example Pages
+                                Account
                                 <span class="caret"></span>
                             </a>
 
                             <ul class="sub-nav">
                                 <li>
-                                    <a href="./page-profile.html">
+                                    <a href="/Accounts/Index">
                                         <i class="fa fa-user"></i>
-                                        Profile
+                                        View Accounts
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="./page-invoice.html">
-                                        <i class="fa fa-money"></i>
-                                        Invoice
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="./page-pricing.html">
-                                        <i class="fa fa-dollar"></i>
-                                        Pricing Plans
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="./page-support.html">
-                                        <i class="fa fa-question"></i>
-                                        Support Page
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="./page-gallery.html">
-                                        <i class="fa fa-picture-o"></i>
-                                        Gallery
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="./page-settings.html">
-                                        <i class="fa fa-cogs"></i>
-                                        Settings
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="./page-calendar.html">
-                                        <i class="fa fa-calendar"></i>
-                                        Calendar
-                                    </a>
-                                </li>
+                              /li>
                             </ul>
 
                         </li>

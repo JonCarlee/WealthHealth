@@ -502,6 +502,11 @@
     <Content Include="Views\Accounts\Details.cshtml" />
     <Content Include="Views\Accounts\Edit.cshtml" />
     <Content Include="Views\Accounts\Index.cshtml" />
+    <Content Include="Views\Home\InviteUser.cshtml" />
+    <Content Include="Views\Home\SetKeyword.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
+    <None Include="Properties\PublishProfiles\jcarlee-wealth-health - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\jcarlee-wealth-health - Web Deploy.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
