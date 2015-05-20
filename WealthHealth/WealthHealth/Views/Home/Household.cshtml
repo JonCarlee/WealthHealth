@@ -1,5 +1,6 @@
 ﻿@model WealthHealth.Models.Custom.Household
-
+@using Microsoft.AspNet.Identity
+@using WealthHealth.Models
 
     <div id="content-header">
         <h1>Dashboard</h1>
@@ -12,8 +13,8 @@
                 &nbsp;&nbsp;<small>For the week of Jun 15 - Jun 22, 2011</small>
                 &nbsp;&nbsp;
             </h4>
-
-            
+            <a href="/Home/Leave/@Model.Id" class="btn btn-danger">Actually Leave Household</a>
+            <a href="" data-toggle="modal" data-target="#leave" class="btn btn-danger btn-sm">Leave Household</a>
             
             <!--$<input type="number" step="0.01" autocomplete="off" decimalprecision="2" maxlength="14" placeholder="0.00" />-->
             <div class="btn-group ">
@@ -415,8 +416,7 @@
 
                     <div class="portlet-content">
 
-                        <div id="donut-chart" class="chart-holder" style="height: 250px"></div>
-
+                        <div id="test"></div>
 
                     </div> <!-- /.portlet-content -->
 
@@ -580,12 +580,15 @@
 
 
 <ul class="howl">
-
 </ul>
 @section Scripts{
     <script>
         $(document).ready(function () {
-            if(@ViewBag.Email == true){
+            var a = "@ViewBag.Email";
+            if(a == ""){
+                a = false;
+            }
+            else{
                 $.howl({
                     type: 'success',
                     title: 'Invite Sent',
@@ -597,7 +600,18 @@
         }
             
         );
+        Morris.Donut({
+            element: 'test',
+            data: [
+              {label: "Bills", value: 12},
+              {label: "Food", value: 30},
+              {label: "Entertainment", value: 20},
+              {label: "Education" , value: 37},
+              {label: "Equipment", value: 28}
+            ]
+        });
+
 
   </script>
 }
-}
+

@@ -14,7 +14,17 @@ using System.Collections.Generic;
 
 namespace WealthHealth.Controllers
 {
-    [Authorize]
+    //[RoutePrefix("")] Prefixes the url instead of conventional naming
+    //[Route("~/", Name="Index")]  ignores any prefixes in the url and names it based on the name specified
+    //[Route("~/{num1:int}/Plus/{num2}:int}")] variables expected at specific places
+    //[Route("~/Accounts/{accountId}/Transactions")] example.
+    //<table id="transactionList" data-accountId="@ViewBag.accountId">
+    //<thead>
+    //<tbody>
+    //<tr>
+    //<td data-transactionId="@item.Id">  <--- Ajax
+
+    //</td>
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -162,14 +172,17 @@ namespace WealthHealth.Controllers
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                     //string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                     //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-
-
-
-                     return RedirectToAction("Household", "Home", new { Id = user.HouseholdId });
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    await new EmailService().SendAsync(new IdentityMessage
+                    {
+                        Subject = "Wealth Health Confirm Accont",
+                        Destination = user.Email,
+                        Body = "Hello, " + user.FirstName + "." + Environment.NewLine + Environment.NewLine +
+                        "You have recently signed up for an account at Wealth Health.  To verify your account, please click this link <a href=\"" + callbackUrl + "\">here</a>.  If you believe that this was a mistake, please disregard this email."
+                    });
+                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
@@ -190,6 +203,34 @@ namespace WealthHealth.Controllers
             var result = await UserManager.ConfirmEmailAsync(userId, code);
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> InviteRegister(RegisterLoginViewModel model, string Id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName,
+                Gender = model.Gender, DisplayName = model.FirstName + " " + model.LastName};
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    db.Households.FirstOrDefault(h => h.HouseId == Id).Users.Add(user);
+                    db.SaveChanges();
+                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    
+                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+
+                     return RedirectToAction("Index", "Home");
+                }
+                AddErrors(result);
+                return View(model);
+            }
+
+            // If we got this far, something failed, redisplay form
 
         //
         // GET: /Account/ForgotPassword
@@ -346,7 +387,8 @@ namespace WealthHealth.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    helper.CreateHousehold(loginInfo.ExternalIdentity.GetUserId(), "Default");
+                    return RedirectToAction("Index", "Home");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:

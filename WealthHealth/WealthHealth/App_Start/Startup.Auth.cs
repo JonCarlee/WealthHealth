@@ -25,7 +25,7 @@ namespace WealthHealth
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/Account/Login"),
+                LoginPath = new PathString("/Home/Index"),
                 Provider = new CookieAuthenticationProvider
                 {
                     // Enables the application to validate the security stamp when the user logs in.
@@ -54,15 +54,15 @@ namespace WealthHealth
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "662613880539835",
+               appSecret: "93053f4410dc72765118bc917760fd13");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "587245130590-ai9m1gd6rmhlmspjjiqc96cddghn7d4i.apps.googleusercontent.com",
+                ClientSecret = "8AOLOCTABFnRUxpEgCkIaMFh"
+            });
         }
     }
 }

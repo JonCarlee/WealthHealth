@@ -5,23 +5,46 @@ using System.Web;
 using System.Web.Mvc;
 using WealthHealth.Models;
 using Microsoft.AspNet.Identity;
+using System.Threading.Tasks;
 
 namespace WealthHealth.Controllers
 {
+    
     public class HomeController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        [AllowAnonymous]
         public ActionResult Index()
         {
             if (User.Identity.IsAuthenticated)
             {
                 var user = db.Users.Find(User.Identity.GetUserId());
+                if (user.HouseholdId == null)
+                {
+                    return RedirectToAction("RegisteredIndex");
+                }
                 return RedirectToAction("Household", "Home", new { Id = user.HouseholdId });
             }
             else
             {
                 return View();
             }
+        }
+        [AllowAnonymous]
+        [Authorize]
+        public ActionResult RegisteredIndex()
+        {
+            return View();
+        }
+
+        public ActionResult Leave(int id)
+        {
+            var bye = User.Identity.GetUserId();
+            var user = db.Users.FirstOrDefault(u => u.Id == bye);
+            user.HouseholdId = null;
+            db.Households.FirstOrDefault(h => h.Id == id).Users.Remove(user);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         public ActionResult Household(string Id)
@@ -34,7 +57,7 @@ namespace WealthHealth.Controllers
         {
             if (db.Households.FirstOrDefault(h => h.Id == id).Keyword == null)
             {
-                return RedirectToAction("SetKeyword", id);
+                return RedirectToAction("SetKeyword", new { Id = id });
             }
             var model = new InviteViewModel();
             model.Id = id;
@@ -52,7 +75,7 @@ namespace WealthHealth.Controllers
             }
             var house = db.Households.FirstOrDefault(h => h.Id == model.Id);
             var sender = db.Users.FirstOrDefault(u => u.Id == model.Sender);
-            var callbackUrl = Url.Action("Register", "Home", house.HouseId);
+            var callbackUrl = Url.Action("InviteRegister", "Home", new { Id = house.HouseId }, protocol: Request.Url.Scheme);
             new EmailService().SendAsync(new IdentityMessage
                 {
                     Subject = "Wealth Health Invite",
@@ -77,15 +100,16 @@ namespace WealthHealth.Controllers
             db.Households.FirstOrDefault(h => h.Id == id).Keyword = keyword;
             db.SaveChanges();
             ViewBag.Set = "Your keyword has been sucessfully set!";
-            return RedirectToAction("InviteUser", id);
+            return RedirectToAction("InviteUser", new { Id = id });
         }
 
-        public ActionResult Register(string id)
+        public ActionResult InviteRegister(string id)
         {
             ViewBag.Id = id;
             return View();
         }
-
+        
+        
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -97,6 +121,11 @@ namespace WealthHealth.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
+            return View();
+        }
+
+        public ActionResult Test()
+        {
             return View();
         }
     }

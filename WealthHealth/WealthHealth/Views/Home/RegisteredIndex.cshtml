@@ -1,0 +1,111 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @*@Styles.Render("~/css/css")*@
+    @Scripts.Render("~/bundles/modernizr")
+
+    <title>Dashboard - Canvas Admin</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="">
+    <meta name="author" content="" />
+    <link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,800italic,400,600,800" type="text/css">
+
+
+    <link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="~/js/libs/css/ui-lightness/jquery-ui-1.9.2.custom.css" type="text/css" />
+
+    <link rel="stylesheet" href="~/js/plugins/icheck/skins/minimal/blue.css" type="text/css" />
+    <link rel="stylesheet" href="~/js/plugins/select2/select2.css" type="text/css" />
+    <link rel="stylesheet" href="~/js/plugins/fullcalendar/fullcalendar.css" type="text/css" />
+
+    <link rel="stylesheet" href="~/css/App.css" type="text/css" />
+
+    <link rel="stylesheet" href="~/css/custom.css" type="text/css" />
+</head>
+<body class="welcome">
+    <div hidden="hidden">
+        <audio src="~/Audio/Website Intro.mp3" autoplay="autoplay"></audio>
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <h1 style="text-align: center; text-decoration:solid" hidden="hidden" id="hello" class="bam">Welcome &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wealth &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Health</h1>
+    <br />
+    <br />
+    <div style="text-align:center">
+        <form method="post" action="/Account/LogOff">
+            @Html.AntiForgeryToken()
+            <button type="button" class="btn btn-info">Join an Existing Household</button>
+            <button type="button" class="btn btn-info">Create a New Household</button>
+            <input type="submit" class="btn btn-info" value="Log Off" />
+        </form>
+    </div>
+
+    <script src="~/js/libs/jquery-1.9.1.min.js"></script>
+    <script src="~/js/libs/jquery-ui-1.9.2.custom.min.js"></script>
+    <script src="~/js/libs/bootstrap.min.js"></script>
+
+    <script src="~/js/plugins/icheck/jquery.icheck.min.js"></script>
+    <script src="~/js/plugins/select2/select2.js"></script>
+    <script src="~/js/plugins/tableCheckable/jquery.tableCheckable.js"></script>
+
+    <script src="~/js/App.js"></script>
+
+    <script src="~/js/libs/raphael-2.1.2.min.js"></script>
+    <script src="~/js/plugins/morris/morris.min.js"></script>
+
+    <script src="~/js/demos/charts/morris/area.js"></script>
+    <script src="~/js/demos/charts/morris/donut.js"></script>
+
+    <script src="~/js/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+    <script src="~/js/plugins/fullcalendar/fullcalendar.min.js"></script>
+    <script src="~/js/demos/calendar.js"></script>
+
+    <script src="~/js/demos/dashboard.js"></script>
+        <script>
+            $(document).ready(function () {
+
+                $("#hello").fadeIn(2000);
+                $("#returning").delay(2000).fadeIn(1000);
+                $("#decide").delay(2000).fadeIn(1000);
+            });
+            var first = false;
+            function toLogin(number) {
+                switch (number) {
+                    case 1:
+                        if (first == false) {
+                            first = true;
+                            $("#return").fadeIn(300);
+                            break;
+                        }
+                        $("#create").slideUp(300);
+                        $("#return").delay(300).slideDown(300);
+                        break;
+                    case 2:
+                        if (first == false) {
+                            first = true;
+                            $("#create").fadeIn(300);
+                            break;
+                        }
+                        $("#return").slideUp(300);
+                        $("#create").delay(300).slideDown(300);
+                        break
+                }
+            }
+            </script>
+</body>
+
+</html>

@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @*@Styles.Render("~/css/css")*@
-    @Scripts.Render("~/bundles/modernizr")
+    @*@Scripts.Render("~/bundles/modernizr")*@
 
     <title>Dashboard - Canvas Admin</title>
     <meta charset="utf-8">
@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css" />
     <link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="~/js/libs/css/ui-lightness/jquery-ui-1.9.2.custom.css" type="text/css" />
-
+    <link rel="stylesheet" href="~/js/plugins/magnific/magnific-popup.css" type="text/css" />
     <link rel="stylesheet" href="~/js/plugins/icheck/skins/minimal/blue.css" type="text/css" />
     <link rel="stylesheet" href="~/js/plugins/select2/select2.css" type="text/css" />
     <link rel="stylesheet" href="~/js/plugins/fullcalendar/fullcalendar.css" type="text/css" />
@@ -116,7 +116,6 @@
                                         View Accounts
                                     </a>
                                 </li>
-                              /li>
                             </ul>
 
                         </li>
@@ -310,6 +309,7 @@
             <div id="content">
                 @RenderBody()
             </div>
+        </div> <!-- #wrapper -->
                 <footer id="footer">
                     <ul class="nav pull-right">
                         <li>
@@ -317,59 +317,56 @@
                         </li>
                     </ul>
                 </footer>
-            </div> <!-- #wrapper -->
-                    <script src="~/js/libs/jquery-1.9.1.min.js"></script>
-            <script src="~/js/libs/jquery-ui-1.9.2.custom.min.js"></script>
-            <script src="~/js/libs/bootstrap.min.js"></script>
+        <a data-toggle="modal" href="#basicModal" class="btn btn-default">Basic Modal</a>
+        <div id="leave" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h3 class="modal-title">Leaving The Household</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
 
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.&hellip;</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        
+            <script src="~/js/libs/jquery-1.9.1.min.js"></script>
+            <script src="~/js/libs/jquery-ui-1.9.2.custom.min.js"></script>
+        
+            
+        
             <script src="~/js/plugins/icheck/jquery.icheck.min.js"></script>
             <script src="~/js/plugins/select2/select2.js"></script>
             <script src="~/js/plugins/tableCheckable/jquery.tableCheckable.js"></script>
 
             <script src="~/js/App.js"></script>
-
+        
             <script src="~/js/libs/raphael-2.1.2.min.js"></script>
             <script src="~/js/plugins/morris/morris.min.js"></script>
 
-            <script src="~/js/demos/charts/morris/area.js"></script>
-            <script src="~/js/demos/charts/morris/donut.js"></script>
 
             <script src="~/js/plugins/sparkline/jquery.sparkline.min.js"></script>
-
+            <script src="~/js/plugins/howl/howl.js"></script>
             <script src="~/js/plugins/fullcalendar/fullcalendar.min.js"></script>
-            <script src="~/js/demos/calendar.js"></script>
-
-            <script src="~/js/demos/dashboard.js"></script>
+            <script src="~/js/libs/bootstrap.js"></script>
+            <script src="~/js/libs/bootstrap.min.js"></script>
         @RenderSection("scripts", required: false)
     </body>
 }
 else
 {
-    <body>
+    
         @RenderBody()
-        <script src="~/js/libs/jquery-1.9.1.min.js"></script>
-        <script src="~/js/libs/jquery-ui-1.9.2.custom.min.js"></script>
-        <script src="~/js/libs/bootstrap.min.js"></script>
 
-        <script src="~/js/plugins/icheck/jquery.icheck.min.js"></script>
-        <script src="~/js/plugins/select2/select2.js"></script>
-        <script src="~/js/plugins/tableCheckable/jquery.tableCheckable.js"></script>
-
-        <script src="~/js/App.js"></script>
-
-        <script src="~/js/libs/raphael-2.1.2.min.js"></script>
-        <script src="~/js/plugins/morris/morris.min.js"></script>
-
-        <script src="~/js/demos/charts/morris/area.js"></script>
-        <script src="~/js/demos/charts/morris/donut.js"></script>
-
-        <script src="~/js/plugins/sparkline/jquery.sparkline.min.js"></script>
-
-        <script src="~/js/plugins/fullcalendar/fullcalendar.min.js"></script>
-        <script src="~/js/demos/calendar.js"></script>
-
-        <script src="~/js/demos/dashboard.js"></script>
         @RenderSection("scripts", required: false)
-    </body>
+    
 }
 </html>
