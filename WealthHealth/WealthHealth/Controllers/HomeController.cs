@@ -47,11 +47,39 @@ namespace WealthHealth.Controllers
             return RedirectToAction("Index");
         }
 
+        //The main page
+        //goes here
+        //look at it
         public ActionResult Household(string Id)
         {
             var house = db.Households.FirstOrDefault(h => h.HouseId == Id);
+            decimal a = 0;
+            if (house.Accounts.Count == 0)
+            {
+
+            }
+            else
+            {
+                foreach (var account in house.Accounts)
+                {
+                    a += account.Amount;
+                }
+            }
+            if (house.BudgetItems.Count == 0)
+            {
+                ViewBag.NoCat = true;
+            }
+            else
+            {
+                ViewBag.Categories = new SelectList(db.Categories.ToList(), "Id", "Name");
+            }
+            ViewBag.Balances = a;
             return View(house);
         }
+
+        //you are now 
+        //leaving the main page
+        //we will miss you
 
         public ActionResult InviteUser(int id)
         {

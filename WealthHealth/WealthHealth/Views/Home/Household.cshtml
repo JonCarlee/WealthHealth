@@ -13,7 +13,7 @@
                 &nbsp;&nbsp;<small>For the week of Jun 15 - Jun 22, 2011</small>
                 &nbsp;&nbsp;
             </h4>
-            <a href="/Home/Leave/@Model.Id" class="btn btn-danger">Actually Leave Household</a>
+
             <a href="" data-toggle="modal" data-target="#leave" class="btn btn-danger btn-sm">Leave Household</a>
             
             <!--$<input type="number" step="0.01" autocomplete="off" decimalprecision="2" maxlength="14" placeholder="0.00" />-->
@@ -45,8 +45,8 @@
                     </div> <!-- /.visual -->
 
                     <div class="details">
-                        <span class="content">Current Projected Income</span>
-                        <span class="value">$4,329</span>
+                        <span class="content">Current Account Balances</span>
+                        <span class="value">$@ViewBag.Balances</span>
                     </div> <!-- /.details -->
 
                     <i class="fa fa-play-circle more"></i>
@@ -204,7 +204,7 @@
 
                                 <ul class="portlet-tools pull-right">
                                     <li>
-                                            <a href="/Accounts/Create/@Model.Id" class="btn btn-sm btn-info">Create an Account</a>
+                                        <a href="" data-toggle="modal" data-target="#newAccount" class="btn btn-info btn-sm">Create an Account</a>
                                     </li>
                                 </ul>
 
@@ -216,13 +216,13 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Transactions</th>
-                                                <th>Current Balance</th>
-                                                <th></th>
+                                                <th style="text-align:center">Name</th>
+                                                <th style="text-align:center">Transactions</th>
+                                                <th style="text-align:center">Current Balance</th>
+                                                <th style="text-align:center"></th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody style="text-align:center">
                                             @foreach (var account in Model.Accounts)
                                             {
                                                 <tr>
@@ -447,7 +447,7 @@
                                 </div> <!-- /.stat-label -->
 
                                 <div class="stat-value">
-                                    77.7%
+                                    27.7%
                                 </div> <!-- /.stat-value -->
 
                             </div> <!-- /stat-header -->
@@ -583,33 +583,52 @@
 </ul>
 @section Scripts{
     <script>
-        $(document).ready(function () {
-            var a = "@ViewBag.Email";
-            if(a == ""){
-                a = false;
+    $(document).ready(function () {
+        var a = "@ViewBag.Email";
+        if(a == ""){
+            a = false;
+        }
+        else{
+            $.howl({
+                type: 'success',
+                title: 'Invite Sent',
+                content: 'Your invite has been sent successfully.',
+                sticky: false,
+                lifetime: 7500
+            });
+        }
+        if(@Model.Users.Count == 1){
+                document.getElementById("whoisleaving").innerHTML = "Warning!  You are the last member of this household.  If you leave your data WILL BE DELETED.  Are you sure you want to leave the household?"
             }
             else{
-                $.howl({
-                    type: 'success',
-                    title: 'Invite Sent',
-                    content: 'Your invite has been sent successfully.',
-                    sticky: false,
-                    lifetime: 7500
-                });
-            }
+                document.getElementById("whoisleaving").innerHTML = "Are you sure you want to leave the household?"
         }
-            
-        );
-        Morris.Donut({
-            element: 'test',
-            data: [
-              {label: "Bills", value: 12},
-              {label: "Food", value: 30},
-              {label: "Entertainment", value: 20},
-              {label: "Education" , value: 37},
-              {label: "Equipment", value: 28}
-            ]
         });
+        if(@Model.BudgetItems.Count == 0){
+            Morris.Donut({
+                element: 'test',
+                data: [
+                {label: "N/A", value: 0}
+                ]
+            });
+        }
+        else{
+            var list = @Model.BudgetItems;
+            var list2 = list.
+            Morris.Donut({
+                element: 'test',
+                data: [
+
+                        {label: "Bills", value: 12},
+                        {label: "Food", value: 30},
+                        {label: "Entertainment", value: 20},
+                        {label: "Education" , value: 37},
+                        {label: "Equipment", value: 28}
+                ]
+            
+
+            });
+        }
 
 
   </script>

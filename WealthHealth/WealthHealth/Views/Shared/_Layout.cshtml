@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    @using WealthHealth.Models
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @*@Styles.Render("~/css/css")*@
@@ -317,7 +318,6 @@
                         </li>
                     </ul>
                 </footer>
-        <a data-toggle="modal" href="#basicModal" class="btn btn-default">Basic Modal</a>
         <div id="leave" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -326,38 +326,144 @@
                         <h3 class="modal-title">Leaving The Household</h3>
                     </div>
                     <div class="modal-body">
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
-
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.&hellip;</p>
+                        <p id="whoisleaving"></p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <form method="get" action="/Home/Leave/@User.Identity.GetHouseholdId()">
+                            <input type="submit" class="btn btn-danger" value="Leave The Household" />
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </form>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
         
+
+        <div id="newAccount" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h3 class="modal-title">Create An Account</h3>
+                    </div>
+                    <form method="post" action="/Accounts/Create">
+                        @Html.AntiForgeryToken()
+                        <div class="modal-body">
+
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    Name
+                                </div>
+                                <div class="col-md-10">
+                                    <input class="form-control" data-val="true" data-val-required="The Name field is required." id="" name="Name" type="text" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    Goal
+                                </div>
+                                <div class="col-md-10">
+                                    <input class="form-control" data-val="true" data-val-required="The Name field is required." id="" name="Amount" type="text" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    Category
+                                </div>
+                                <div class="col-md-10">
+                                    <input class="form-control" data-val="true" data-val-required="The Name field is required." id="" name="Amount" type="text" value="">
+                                </div>
+                            </div>
+
+                            <input type="hidden" name="HouseholdId" value="@User.Identity.GetHouseholdId()" />
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-info" value="Create Account" />
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+
+                        </div>
+                    </form>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        <div id="newBudget" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h3 class="modal-title">Create A Budget Item</h3>
+                    </div>
+                    <form method="post" action="/Accounts/Create">
+                        @Html.AntiForgeryToken()
+                        <div class="modal-body">
+
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    Name
+                                </div>
+                                <div class="col-md-10">
+                                    <input class="form-control" data-val="true" data-val-required="The Name field is required." id="" name="Name" type="text" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    Goal
+                                </div>
+                                <div class="col-md-10">
+                                    @ViewBag.Error
+                                    <input class="form-control" data-val="true" data-val-required="The Goal field is required." id="" name="Amount" onkeypress="return restrictCharacters(this, event, floatOnly)" type="text" autocomplete="off" decimalprecision="2" maxlength="14" placeholder="0.00" value="">
+                                </div>
+                            </div>
+                            <input type="checkbox" onclick=""  value="New Category"/>
+                            <input type="hidden" name="HouseholdId" value="@User.Identity.GetHouseholdId()" />
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-info" value="Create Account" />
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+
+                        </div>
+                    </form>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
             <script src="~/js/libs/jquery-1.9.1.min.js"></script>
             <script src="~/js/libs/jquery-ui-1.9.2.custom.min.js"></script>
-        
-            
-        
             <script src="~/js/plugins/icheck/jquery.icheck.min.js"></script>
             <script src="~/js/plugins/select2/select2.js"></script>
             <script src="~/js/plugins/tableCheckable/jquery.tableCheckable.js"></script>
-
             <script src="~/js/App.js"></script>
-        
             <script src="~/js/libs/raphael-2.1.2.min.js"></script>
             <script src="~/js/plugins/morris/morris.min.js"></script>
-
-
             <script src="~/js/plugins/sparkline/jquery.sparkline.min.js"></script>
             <script src="~/js/plugins/howl/howl.js"></script>
             <script src="~/js/plugins/fullcalendar/fullcalendar.min.js"></script>
             <script src="~/js/libs/bootstrap.js"></script>
             <script src="~/js/libs/bootstrap.min.js"></script>
+        <script>
+        var digitsOnly = /[1234567890]/g;
+        var floatOnly = /[0-9\.]/g;
+        var alphaOnly = /[A-Za-z]/g;
+
+        function restrictCharacters(myfield, e, restrictionType) {
+        if (!e) var e = window.event
+        if (e.keyCode) code = e.keyCode;
+        else if (e.which) code = e.which;
+        var character = String.fromCharCode(code);
+        // if they pressed esc... remove focus from field...
+        if (code==27) { this.blur(); return false; }
+        // ignore if they are press other keys
+        // strange because code: 39 is the down key AND ' key...
+        // and DEL also equals .
+        if (!e.ctrlKey && code!=9 && code!=8 && code!=36 && code!=37 && code!=38 && (code!=39 || (code==39 && character=="'")) && code!=40) {
+        if (character.match(restrictionType)) {
+        return true;
+        } else {
+        return false;
+        }
+        }
+        }
+    </script>
         @RenderSection("scripts", required: false)
     </body>
 }
