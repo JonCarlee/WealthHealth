@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using WealthHealth.Models;
 using Microsoft.AspNet.Identity;
 using System.Threading.Tasks;
+using WealthHealth.Models.Custom;
 
 namespace WealthHealth.Controllers
 {
@@ -65,13 +66,24 @@ namespace WealthHealth.Controllers
                     a += account.Amount;
                 }
             }
-            if (house.BudgetItems.Count == 0)
+            if (db.Categories.Count() == 0)
             {
                 ViewBag.NoCat = true;
             }
             else
             {
-                ViewBag.Categories = new SelectList(db.Categories.ToList(), "Id", "Name");
+                var list = db.Categories.ToList();
+                var categories = new List<string>();
+                foreach (var item in list)
+                {
+                    if (item.Transactions.Any(t => t.Account.HouseholdId == house.HouseId))
+                    {
+                        categories.Add(item.Name);
+                     
+                    }
+                }
+                ViewBag.Categories = categories;
+                ViewBag.NoCat = false;
             }
             ViewBag.Balances = a;
             return View(house);

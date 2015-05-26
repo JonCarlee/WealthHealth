@@ -9,7 +9,15 @@ using System.Linq;
 
 namespace WealthHealth.Models
 {
+    public class CategoryHelper
+    {
+        private ApplicationDbContext db = new ApplicationDbContext();
 
+        public void CreateCategory(string name)
+        {
+            
+        }
+    }
     public class UserHouseholdHelper
     {
         private ApplicationDbContext db = new ApplicationDbContext();

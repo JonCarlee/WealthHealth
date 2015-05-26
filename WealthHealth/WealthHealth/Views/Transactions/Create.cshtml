@@ -14,14 +14,48 @@
         <h4>Transaction</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
         <div class="form-group">
-            @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.AccountId, "Account", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+                @Html.DropDownList("AccountId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.AccountId, "", new { @class = "text-danger" })
             </div>
         </div>
+        @if (ViewBag.NoCat != null)
+        {
+            <div class="form-group">
+                <label class="control-label col-md-2">New Category</label>
+                <div class="col-md-10">
+                    <input class="form-control" type="text" name="newCat" value="" />
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="form-group" hidden="hidden" id="new">
+                <label class="control-label col-md-2">New Category</label>
+                <div class="col-md-10">
+                    <input class="form-control" type="text" name="newCat" value="" />
+                </div>
+            </div>
+            <div class="form-group" id="list">
+                @Html.LabelFor(model => model.CategoryId, "Category", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">New Category</label>
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        <input type="checkbox" title="New Category" onclick="change()" />
+                    </div>
+                </div>
+            </div>
 
+        }
         <div class="form-group">
             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -31,7 +65,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MoneyFlow, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="col-md-2 control-label">Is Income</label>
             <div class="col-md-10">
                 <div class="checkbox">
                     @Html.EditorFor(model => model.MoneyFlow)
@@ -49,14 +83,6 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ReconciledAmount, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ReconciledAmount, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ReconciledAmount, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
             @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
@@ -64,29 +90,9 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.AccountId, "AccountId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("AccountId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.AccountId, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.HouseholdId, "HouseholdId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("HouseholdId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.HouseholdId, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CategoryId, "CategoryId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -99,3 +105,21 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+<script>
+    var newCat = false;
+    function change() {
+        if (newCat == false) {
+            newCat = true;
+            $('#list').fadeOut(300);
+            $('#new').delay(300).fadeIn(300);
+        }
+        else {
+            newCat = false;
+            $('#new').fadeOut(300);
+            $('#list').delay(300).fadeIn(300);
+        }
+    }
+
+    
+</script>

@@ -18,7 +18,7 @@ namespace WealthHealth.Controllers
         // GET: Transactions
         public ActionResult Index()
         {
-            var transactions = db.Transactions.Include(t => t.Account).Include(t => t.Category).Include(t => t.Household);
+            var transactions = db.Transactions.Include(t => t.Account).Include(t => t.Category);
             return View(transactions.ToList());
         }
 
@@ -40,9 +40,18 @@ namespace WealthHealth.Controllers
         // GET: Transactions/Create
         public ActionResult Create()
         {
-            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Name");
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
-            ViewBag.HouseholdId = new SelectList(db.Households, "Id", "HouseId");
+            ViewBag.AccountId = new SelectList(db.Accounts.Where(a => a.HouseholdId == User.Identity.GetHouseholdId()).ToList(), "Id", "Name");
+            if (db.Categories.Count() == 0)
+            {
+                ViewBag.NoCat = true;
+            }
+            else
+            {
+                ViewBag.CategoryId = new SelectList(db.Categories.Where(c => c.Transactions.Any(t => t.Account.HouseholdId == User.Identity.GetHouseholdId())).ToList(), "Id", "Name");
+
+            }
+            
+            
             return View();
         }
 
@@ -51,18 +60,40 @@ namespace WealthHealth.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Type,Description,MoneyFlow,Amount,ReconciledAmount,Date,AccountId,HouseholdId,CategoryId")] Transaction transaction)
+        public ActionResult Create([Bind(Include = "Id,Type,Description,MoneyFlow,Amount,ReconciledAmount,Date,AccountId,CategoryId")] Transaction transaction, string newCat)
         {
+            if (newCat != "")
+            {
+                var cat = new Category{
+                    Name = newCat
+                };
+                db.Categories.Add(cat);
+                db.SaveChanges();
+                transaction.CategoryId = cat.Id;
+            }
+            var account = db.Accounts.FirstOrDefault(a => a.Id == transaction.AccountId);
+            if (transaction.MoneyFlow == true)
+            {
+                transaction.Type = "Income";
+            }
+            else { transaction.Type = "Expense"; }
             if (ModelState.IsValid)
             {
+                if (transaction.Type == "Income")
+                {
+                    account.Amount += transaction.Amount;
+                }
+                else
+                {
+                    account.Amount -= transaction.Amount;
+                }
                 db.Transactions.Add(transaction);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Name", transaction.AccountId);
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", transaction.CategoryId);
-            ViewBag.HouseholdId = new SelectList(db.Households, "Id", "HouseId", transaction.HouseholdId);
+            var house = User.Identity.GetHouseholdId();
+            ViewBag.AccountId = new SelectList(db.Accounts.Where(a => a.HouseholdId == house).ToList(), "Id", "Name", transaction.AccountId);
+            ViewBag.CategoryId = new SelectList(db.Categories.Where(c => c.Transactions.Any(t => t.Account.HouseholdId == house)).ToList(), "Id", "Name", transaction.CategoryId);
             return View(transaction);
         }
 
@@ -78,9 +109,9 @@ namespace WealthHealth.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Name", transaction.AccountId);
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", transaction.CategoryId);
-            ViewBag.HouseholdId = new SelectList(db.Households, "Id", "HouseId", transaction.HouseholdId);
+            var house = User.Identity.GetHouseholdId();
+            ViewBag.AccountId = new SelectList(db.Accounts.Where(a => a.HouseholdId == house).ToList(), "Id", "Name", transaction.AccountId);
+            ViewBag.CategoryId = new SelectList(db.Categories.Where(c => c.Transactions.Any(t => t.Account.HouseholdId == house)).ToList(), "Id", "Name", transaction.CategoryId);
             return View(transaction);
         }
 
@@ -89,17 +120,54 @@ namespace WealthHealth.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Type,Description,MoneyFlow,Amount,ReconciledAmount,Date,AccountId,HouseholdId,CategoryId")] Transaction transaction)
+        public ActionResult Edit([Bind(Include = "Id,Type,Description,MoneyFlow,Amount,ReconciledAmount,Date,AccountId,CategoryId")] Transaction transaction, string newCat)
         {
+
+            if (newCat != "")
+            {
+                var cat = new Category
+                {
+                    Name = newCat
+                };
+                db.Categories.Add(cat);
+                db.SaveChanges();
+                transaction.CategoryId = cat.Id;
+            }
+                var oldTransaction = (from t in db.Transactions.AsNoTracking()
+                                      where t.Id == transaction.Id
+                                      select t).FirstOrDefault();
+                var oldAccount = db.Accounts.FirstOrDefault(a => a.Id == oldTransaction.AccountId);
+
+                var account = db.Accounts.FirstOrDefault(a => a.Id == transaction.AccountId);
+                if (transaction.MoneyFlow == true)
+                {
+                    transaction.Type = "Income";
+                }
+                else { transaction.Type = "Expense"; }
             if (ModelState.IsValid)
             {
+                if (oldTransaction.Type == "Expense")
+                {
+                    oldAccount.Amount += oldTransaction.Amount;
+                }
+                else
+                {
+                    oldAccount.Amount -= oldTransaction.Amount;
+                }
+                if (transaction.Type == "Income")
+                {
+                    account.Amount += transaction.Amount;
+                }
+                else
+                {
+                    account.Amount -= transaction.Amount;
+                }
                 db.Entry(transaction).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Name", transaction.AccountId);
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", transaction.CategoryId);
-            ViewBag.HouseholdId = new SelectList(db.Households, "Id", "HouseId", transaction.HouseholdId);
+            ViewBag.AccountId = new SelectList(db.Accounts.Where(a => a.HouseholdId == User.Identity.GetHouseholdId()).ToList(), "Id", "Name", transaction.AccountId);
+            ViewBag.CategoryId = new SelectList(db.Categories.Where(c => c.Transactions.Any(t => t.Account.HouseholdId == User.Identity.GetHouseholdId())).ToList(), "Id", "Name", transaction.CategoryId);
             return View(transaction);
         }
 
@@ -124,6 +192,15 @@ namespace WealthHealth.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Transaction transaction = db.Transactions.Find(id);
+            Account account = db.Accounts.Find(transaction.AccountId);
+            if (transaction.Type == "Income")
+            {
+                account.Amount -= transaction.Amount;
+            }
+            else
+            {
+                account.Amount += transaction.Amount;
+            }
             db.Transactions.Remove(transaction);
             db.SaveChanges();
             return RedirectToAction("Index");

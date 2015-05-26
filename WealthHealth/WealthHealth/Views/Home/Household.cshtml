@@ -244,7 +244,7 @@
 
                                 <hr />
 
-                                <a href="javascript:;" class="btn btn-sm btn-secondary">View All Orders</a>
+                                <a href="javascript:;" class="btn btn-sm btn-secondary">View All Accounts</a>
 
 
                             </div> <!-- /.portlet-content -->
@@ -604,7 +604,7 @@
                 document.getElementById("whoisleaving").innerHTML = "Are you sure you want to leave the household?"
         }
         });
-        if(@Model.BudgetItems.Count == 0){
+        if(@ViewBag.NoCat == true){
             Morris.Donut({
                 element: 'test',
                 data: [
@@ -613,20 +613,20 @@
             });
         }
         else{
-            var list = @Model.BudgetItems;
-            var list2 = list.
+            var list = new Array();
+            var output = new Array();
+            for(var i = 0; i < list.length; i++){
+                if(list[i] == ""){
+
+                }
+                else{
+                    output[i] = {label: list[i], value: 20}
+                }
+            }
             Morris.Donut({
                 element: 'test',
-                data: [
-
-                        {label: "Bills", value: 12},
-                        {label: "Food", value: 30},
-                        {label: "Entertainment", value: 20},
-                        {label: "Education" , value: 37},
-                        {label: "Equipment", value: 28}
-                ]
-            
-
+                data:
+                    [output]
             });
         }
 

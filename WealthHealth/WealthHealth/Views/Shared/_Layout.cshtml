@@ -121,34 +121,11 @@
 
                         </li>
 
-                        <li class="dropdown">
-                            <a href="javascript:;">
+                        <li>
+                            <a href="/Transactions/Index">
                                 <i class="fa fa-tasks"></i>
-                                Form Elements
-                                <span class="caret"></span>
+                                Transactions
                             </a>
-
-                            <ul class="sub-nav">
-                                <li>
-                                    <a href="./form-regular.html">
-                                        <i class="fa fa-location-arrow"></i>
-                                        Regular Elements
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="./form-extended.html">
-                                        <i class="fa fa-magic"></i>
-                                        Extended Elements
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="./form-validation.html">
-                                        <i class="fa fa-check"></i>
-                                        Validation
-                                    </a>
-                                </li>
-                            </ul>
-
                         </li>
 
                         <li class="dropdown">
@@ -411,11 +388,32 @@
                                     Goal
                                 </div>
                                 <div class="col-md-10">
-                                    @ViewBag.Error
                                     <input class="form-control" data-val="true" data-val-required="The Goal field is required." id="" name="Amount" onkeypress="return restrictCharacters(this, event, floatOnly)" type="text" autocomplete="off" decimalprecision="2" maxlength="14" placeholder="0.00" value="">
                                 </div>
                             </div>
-                            <input type="checkbox" onclick=""  value="New Category"/>
+                            @if (ViewBag.NoCat != null)
+                            {
+                                <div class="form-group">
+                                    <div class="col-md-2">
+                                        Category
+                                    </div>
+                                    <div class="col-md-10">
+                                        <input class="form-control" data-val="true" data-val-required="The Goal field is required." id="" name="Amount" onkeypress="return restrictCharacters(this, event, floatOnly)" type="text" autocomplete="off" decimalprecision="2" maxlength="14" placeholder="0.00" value="">
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="form-group">
+                                    <div class="col-md-2">
+                                        Category
+                                    </div>
+                                    <div class="col-md-10">
+                                        <input class="form-control" data-val="true" data-val-required="The Goal field is required." id="" name="Category" type="text" value="">
+                                    </div>
+                                </div>
+                            }
+                            <input type="checkbox"  value="New Category"/>
                             <input type="hidden" name="HouseholdId" value="@User.Identity.GetHouseholdId()" />
                         </div>
                         <div class="modal-footer">

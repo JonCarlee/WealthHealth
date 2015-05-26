@@ -12,14 +12,12 @@ namespace WealthHealth.Models.Custom
         public string Description { get; set; }
         public bool MoneyFlow { get; set; }
         public decimal Amount { get; set; }
-        public decimal ReconciledAmount { get; set; } //I don't know about this one
+        public decimal? ReconciledAmount { get; set; } //I don't know about this one
         public DateTimeOffset Date { get; set; }
         public int AccountId { get; set; }
-        public int? HouseholdId { get; set;}
         public int CategoryId { get; set; }
 
         public virtual Account Account { get; set; }
-        public virtual Household Household { get; set; }
         public virtual Category Category { get; set; }
     }
 }
