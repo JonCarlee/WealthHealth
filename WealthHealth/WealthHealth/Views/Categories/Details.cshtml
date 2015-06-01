@@ -1,0 +1,115 @@
+﻿@model WealthHealth.Models.Custom.Category
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Income</h4>
+    <hr />
+   <table>
+       <thead>
+           <tr>
+               <th>
+                   Account
+               </th>
+               <th>
+                   Description
+               </th>
+               <th>
+                   Amount
+               </th>
+               <th>
+                   Reconciled Amount
+               </th>
+               <th>
+                   Date
+               </th>
+           </tr>
+       </thead>
+       <tbody>
+           @foreach (var item in Model.Transactions)
+           { 
+            if (item.Type == "Income")
+            { 
+           <tr>
+               <td>
+                    @Html.DisplayFor(modelItem => item.Account.Name)
+               </td>
+               <td>
+                   @Html.DisplayFor(modelItem => item.Description)
+               </td>
+               <td>
+                   @Html.DisplayFor(modelItem => item.Amount)
+               </td>
+               <td>
+                   @Html.DisplayFor(modelItem => item.ReconciledAmount)
+               </td>
+               <td>
+                   @Html.DisplayFor(modelItem => item.Date)
+               </td>
+           </tr>
+           }
+           }
+       </tbody>
+   </table>
+    </div>
+<br />
+<br /><br /><br />
+<div>
+    <h4>Expenses</h4>
+    <hr />
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Account
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Amount
+                </th>
+                <th>
+                    Reconciled Amount
+                </th>
+                <th>
+                    Date
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Transactions)
+            {
+                if (item.Type == "Expense")
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Account.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Amount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ReconciledAmount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+<br /><br /><br />
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

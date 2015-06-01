@@ -38,17 +38,17 @@
 
 
             </label>
-            <label class="btn btn-info" style="width: 200px; height:50px; font-size: 25px;" onclick="toLogin(3)">
-
-                <input id="option3" type="radio" name="member" value="visiting" />
-
-                Demo
-
-
-            </label>
 
         </div>
-    </div>   
+        <div>
+            <form method="post" action="/Account/Login">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="admin" value="true" />
+                <input type="submit" value="Demo" class="btn btn-info" style="width: 200px; height:50px; font-size: 25px;" />
+            </form>
+        </div> 
+    </div>  
+
     <br />
     <br />
     <div class="container"> 
@@ -249,7 +249,8 @@
                 }
                 $("#return").slideUp(300);
                 $("#create").delay(300).slideDown(300);
-                break
+                break;
+            case 3:
         }
     }
 

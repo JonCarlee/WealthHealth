@@ -15,7 +15,7 @@ namespace WealthHealth.Models.Custom
         public string Name { get; set; }
         public decimal Amount { get; set; }
         public int CategoryId { get; set; }
-        public int HouseholdId { get; set; }
+        public string HouseholdId { get; set; }
 
         public virtual Category Category { get; set; }
         public virtual Household Household { get; set; }

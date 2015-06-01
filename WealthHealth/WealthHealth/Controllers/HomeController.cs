@@ -48,6 +48,66 @@ namespace WealthHealth.Controllers
             return RedirectToAction("Index");
         }
 
+       /* public JsonResult GetDate(int type){
+            if (type == 1){
+                return Json(System.DateTimeOffset.Now.Month, JsonRequestBehavior.AllowGet);
+    }
+            else if (type == 2)
+            {
+                if(System.DateTimeOffset.Now.Day + 7 > System.DateTime.DaysInMonth(System.DateTimeOffset.Now.Year,System.DateTimeOffset.Now.Month){
+                    var currMonth = System.DateTimeOffset.Now.Month - 1;
+                    var 
+                }
+                return Json()
+            }
+            }*/
+        public JsonResult GetCategories()
+        {
+            var list = new List<string>();
+
+            var results = from c in db.Categories
+                          let count = c.Transactions.Count
+                          select new {
+                              label = c.Name,
+                              value = (from t in c.Transactions
+                                       where t.Type == "Expense"
+                                       select t.Amount).DefaultIfEmpty().Sum()
+                          };
+
+            return Json(results, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetBudget()
+        {
+            var id = User.Identity.GetHouseholdId();
+            var days = System.DateTime.DaysInMonth(System.DateTime.Now.Year, System.DateTime.Now.Month);
+            var list = new List<string>();
+            for (int i = 1; i <= days; i++)
+            {
+                list.Add(i.ToString());
+            }
+            var numOfDays = (from day in Enumerable.Range(1, System.DateTime.DaysInMonth(System.DateTime.Now.Year, System.DateTime.Now.Month))
+                             select new DateTime(System.DateTime.Now.Year, System.DateTime.Now.Month, day)).ToList();
+            var results = from b in db.BudgetItems
+                          from day in numOfDays
+                          select new{
+                              day = day.Day.ToString(),
+                              moneyBudgeted = (b.Amount - (from t in b.Category.Transactions
+                                                          where t.Type == "Expense" && (1 <= t.Date.Day && t.Date.Day <= day.Day) & t.Account.HouseholdId == id
+                                                          select t.Amount).DefaultIfEmpty().Sum()) > 0 ? (b.Amount - (from t in b.Category.Transactions
+                                                                                                                 where t.Type == "Expense" && (1 <= t.Date.Day && t.Date.Day <= day.Day) & t.Account.HouseholdId == id
+                                                                                                                 select t.Amount).DefaultIfEmpty().Sum()) : 0,
+                              moneySpent = (from t in b.Category.Transactions
+                                            where t.Type == "Expense" && (1 <= t.Date.Day  && t.Date.Day <= day.Day) & t.Account.HouseholdId == id
+                                                select t.Amount).DefaultIfEmpty().Sum(),
+                              moneyOver = ((from t in b.Category.Transactions
+                                                          where t.Type == "Expense" && (1 <= t.Date.Day && t.Date.Day <= day.Day) & t.Account.HouseholdId == id
+                                                          select t.Amount).DefaultIfEmpty().Sum() - b.Amount) > 0 ? (from t in b.Category.Transactions
+                                                          where t.Type == "Expense" && (1 <= t.Date.Day && t.Date.Day <= day.Day) & t.Account.HouseholdId == id
+                                                          select t.Amount).DefaultIfEmpty().Sum() - b.Amount : 0
+                          };
+            return Json(results, JsonRequestBehavior.AllowGet);
+        }
         //The main page
         //goes here
         //look at it

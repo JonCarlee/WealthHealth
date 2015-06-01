@@ -40,14 +40,15 @@ namespace WealthHealth.Controllers
         // GET: Transactions/Create
         public ActionResult Create()
         {
-            ViewBag.AccountId = new SelectList(db.Accounts.Where(a => a.HouseholdId == User.Identity.GetHouseholdId()).ToList(), "Id", "Name");
+            var id = User.Identity.GetHouseholdId();
+            ViewBag.AccountId = new SelectList(db.Accounts.Where(a => a.HouseholdId == id).ToList(), "Id", "Name");
             if (db.Categories.Count() == 0)
             {
                 ViewBag.NoCat = true;
             }
             else
             {
-                ViewBag.CategoryId = new SelectList(db.Categories.Where(c => c.Transactions.Any(t => t.Account.HouseholdId == User.Identity.GetHouseholdId())).ToList(), "Id", "Name");
+                ViewBag.CategoryId = new SelectList(db.Categories.Where(c => c.Transactions.Any(t => t.Account.HouseholdId == id)).ToList(), "Id", "Name");
 
             }
             

@@ -80,11 +80,17 @@ namespace WealthHealth.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(RegisterLoginViewModel model, string returnUrl)
+        public async Task<ActionResult> Login(RegisterLoginViewModel model, string returnUrl, bool? admin)
         {
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
+            if (admin == true){
+                model.Email = "admin@admin.admin";
+                model.Password = "Abc123!";
+                model.RememberMe = false;
+            }
+
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
